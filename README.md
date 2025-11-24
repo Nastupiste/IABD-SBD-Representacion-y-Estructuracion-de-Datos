@@ -29,23 +29,20 @@ Siguiendo las directrices del proyecto, nuestros objetivos específicos para est
 
 ## 🌦️ Fuentes de Datos
 
-Para cumplir con el requisito de "uso de diferentes fuentes de datos" y "fuentes de organismos contrastados", valoramos en primera instancia las siguientes APIs:
+Para cumplir con el requisito de "uso de diferentes fuentes de datos" y "fuentes de organismos contrastados", utilizaremos las siguientes APIs:
 
-- **[AEMET OpenData](https://www.aemet.es/es/datos_abiertos/AEMET_OpenData):** API de la Agencia Estatal de Meteorología de España. Es una fuente de datos oficial y contrastada, ideal para obtener datos específicos del territorio español.
 - **[Open-Meteo](https://open-meteo.com/):** Una API abierta, sin necesidad de API key para uso no comercial. Ofrece datos globales y un amplio historial de datos.
-- **[OpenWeatherMap](https://openweathermap.org/api):** Proporciona datos actuales, pronósticos y datos históricos a través de su plan gratuito (One Call API 3.0).
 - **[Meteosource](https://www.meteosource.com/es/api-climatologica-actual):** Ofrece un plan grautito donde nos permite consultar tanto pronósticos actuales como futuros.
 
-La selección final y el diseño de la extracción se basarán en la facilidad de uso, los límites de tasa (rate limiting) y la riqueza de los datos que ofrezca cada una.
+Hemos descartado algunas otras, basando la selección final y el diseño de la extracción en la facilidad de uso, los límites de tasa (rate limiting) y la riqueza de los datos que ofrecen cada una.
 
 ---
 
-## 💻 Stack Tecnológico (Propuesta Inicial)
+## 💻 Stack Tecnológico
 
-- **Lenguaje:** Python 3.x
+- **Lenguaje:** Python 3.13
 - **Obtención de Datos:**
   - `requests`: Para realizar las consultas a las APIs REST.
-  - `python-dotenv`: Para gestionar las API keys de forma segura (no subirlas a GitHub).
 - **Limpieza y Transformación:**
   - `pandas`: Para la manipulación, limpieza y unificación de los datos.
 - **Almacenamiento:**
@@ -55,13 +52,15 @@ La selección final y el diseño de la extracción se basarán en la facilidad d
 
 ---
 
-## 📁 Estructura del Repositorio (Propuesta)
+## 📁 Estructura del Repositorio
 
 ```bash
 ├── scripts/ # Scripts para ETL (extracción, transformación, carga)
-│ ├── extract.py
+│ ├── extract_meteo.py # API 1
+│ ├── extract_meteosource.py # API 2
 │ ├── transform.py
 │ └── load.py
+├── mongo/ # Configuración de la base de datos
 ├── .env.example # Plantilla para variables de entorno (API Keys)
 ├── .gitignore
 └── README.md
