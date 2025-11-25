@@ -1,14 +1,14 @@
-import time
-import json
 from datetime import datetime
 from pymeteosource.api import Meteosource
 from pymeteosource.types import tiers, sections, units, langs
+from mongo_connection import insert_data
 
 # Variables
 API_KEY = "kactprlujoa3p677acx480865izfqb0yvuer9ezb"
 TIER = tiers.FREE
 LAT = "37.3886"
 LON = "-5.9823"
+COLLECTION_NAME = "meteosource"
 
 def obtencion_datos_api():
     try:
@@ -69,16 +69,13 @@ def obtencion_datos_api():
             }
         }
 
-        print(f"Ubicación: Sevilla")
+        print("Ubicación: Sevilla")
         print(f"Temperatura: {forecast.current.temperature}ºC")
         print(f"Resumen: {forecast.current.summary}")
         print(f"Predicción futura: {len(hourly_data)} horas procesadas.")
-
-        nombre_archivo = f"clima_sevilla_{int(time.time())}.json"
-        with open(nombre_archivo, 'w', encoding='utf-8') as f:
-            json.dump(datos_finales, f, indent=4, ensure_ascii=False)
-
-        print(f"Datos guardados en {nombre_archivo}")
+        
+        # Insertar datos en MongoDB
+        insert_data(COLLECTION_NAME, datos_finales)
 
     except Exception as e:
         print(f"Error al obtener datos: {e}")
