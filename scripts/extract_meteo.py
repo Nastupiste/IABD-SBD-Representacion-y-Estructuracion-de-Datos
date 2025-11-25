@@ -1,11 +1,11 @@
 import requests
-import json
-import time
 from datetime import datetime
+from mongo_connection import insert_data
 
 LAT = "37.3886" 
 LON = "-5.9823"
 URL = "https://api.open-meteo.com/v1/forecast"
+COLLECTION_NAME = "openmeteo"
 
 
 def get_wind_dir(degrees):
@@ -130,11 +130,8 @@ def obtencion_datos_open_meteo():
             }
         }
 
-        nombre_archivo = f"clima_sevilla_openmeteo_{int(time.time())}.json"
-        with open(nombre_archivo, 'w', encoding='utf-8') as f:
-            json.dump(datos_finales, f, indent=4, ensure_ascii=False)
-            
-        print(f"Datos guardados en {nombre_archivo}")
+        # Insertar datos en MongoDB
+        insert_data(COLLECTION_NAME, datos_finales)
 
     except Exception as e:
         print(f"Error al obtener datos de Open-Meteo: {e}")
