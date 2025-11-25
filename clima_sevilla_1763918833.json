@@ -1,0 +1,144 @@
+{
+    "lat": "37.3886",
+    "lon": "-5.9823",
+    "timestamp_captura": "2025-11-23 18:27:11",
+    "current": {
+        "temperature": 14.2,
+        "summary": "Overcast",
+        "icon": "overcast",
+        "wind": {
+            "speed": 1.1,
+            "angle": 211,
+            "dir": "SSW"
+        },
+        "precipitation": {
+            "total": 0.0,
+            "type": "none"
+        },
+        "cloud_cover": 92
+    },
+    "hourly": {
+        "data": [
+            {
+                "date": "2025-11-23 17:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 14.2,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 18:00:00+00:00",
+                "weather": "cloudy",
+                "temperature": 13.0,
+                "summary": "Cloudy",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 19:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 12.0,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 20:00:00+00:00",
+                "weather": "partly_clear",
+                "temperature": 10.5,
+                "summary": "Partly clear",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 21:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 9.2,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 22:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 8.2,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-23 23:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 7.8,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-24 00:00:00+00:00",
+                "weather": "overcast",
+                "temperature": 7.5,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-24 01:00:00+00:00",
+                "weather": "fog",
+                "temperature": 7.2,
+                "summary": "Fog",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-24 02:00:00+00:00",
+                "weather": "fog",
+                "temperature": 7.0,
+                "summary": "Fog",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-24 03:00:00+00:00",
+                "weather": "fog",
+                "temperature": 6.8,
+                "summary": "Fog",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-24 04:00:00+00:00",
+                "weather": "fog",
+                "temperature": 6.5,
+                "summary": "Fog",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            }
+        ]
+    }
+}
