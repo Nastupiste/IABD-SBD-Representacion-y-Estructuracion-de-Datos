@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-from mongo_connection import insert_data
+from .mongo_connection import insert_data
 
 LAT = "37.3886" 
 LON = "-5.9823"

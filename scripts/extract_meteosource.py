@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from pymeteosource.api import Meteosource
 from pymeteosource.types import tiers, sections, units, langs
-from mongo_connection import insert_data
+from .mongo_connection import insert_data
 
 load_dotenv()  # Cargar variables del archivo .env
 

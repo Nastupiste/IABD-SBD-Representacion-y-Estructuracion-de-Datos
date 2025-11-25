@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 from bson import ObjectId
 from pymongo import MongoClient
@@ -6,6 +7,8 @@ from pymongo import MongoClient
 load_dotenv()  # Cargar variables del archivo .env
 MONGODB_URI = os.getenv("MONGODB_URI")
 DB_NAME = os.getenv("DB_NAME")
+OPENMETEO = "openmeteo"
+METEOSOURCE = "meteosource"
 
 # Generamos un cliente con las credenciales de conexión del .env
 client = MongoClient(MONGODB_URI)
@@ -50,6 +53,25 @@ def read_data(collection_name: str, filtro: dict = None):
         print(f"Error leyendo datos de MongoDB ({collection_name}): {e}")
         return []
 
+def leer_todo():
+    """
+    Lee datos de ambas colecciones en MongoDB.
+    Retorna un diccionario con listas de documentos.
+    """
+    datos_openmeteo = read_data(OPENMETEO)
+    print(f"======== DOCUMENTOS EN 'OPENMETEO': {len(datos_openmeteo)} ========")
+    if len(datos_openmeteo) > 0:
+        for i, doc in enumerate(datos_openmeteo):
+            print(f"==== DOCUMENTO {i+1} ({doc['timestamp_captura']}) ====")
+            print(json.dumps(doc, indent=2, ensure_ascii=False))
+
+    datos_meteosource = read_data(METEOSOURCE)
+    print(f"======== DOCUMENTOS EN 'METEOSOURCE': {len(datos_meteosource)} ========")
+    if len(datos_meteosource) > 0:
+        for i, doc in enumerate(datos_meteosource):
+            print(f"==== DOCUMENTO {i+1} ({doc['timestamp_captura']}) ====")
+            print(json.dumps(doc, indent=2, ensure_ascii=False))
+
 
 def insert_data(collection_name: str, data: dict):
     """
@@ -70,3 +92,4 @@ def insert_data(collection_name: str, data: dict):
 
 if __name__ == "__main__":
     test_connection()
+    leer_todo()
