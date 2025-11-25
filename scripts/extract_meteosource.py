@@ -1,10 +1,14 @@
+import os
+from dotenv import load_dotenv
 from datetime import datetime
 from pymeteosource.api import Meteosource
 from pymeteosource.types import tiers, sections, units, langs
 from mongo_connection import insert_data
 
+load_dotenv()  # Cargar variables del archivo .env
+
 # Variables
-API_KEY = "kactprlujoa3p677acx480865izfqb0yvuer9ezb"
+API_KEY = os.getenv("METEOSOURCE_API_KEY")
 TIER = tiers.FREE
 LAT = "37.3886"
 LON = "-5.9823"
