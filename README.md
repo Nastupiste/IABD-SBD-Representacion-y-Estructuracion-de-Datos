@@ -2,7 +2,7 @@
 
 ![Banner para el README.md](assets/banner_readme.jpg)
 
-Este repositorio contiene el proyecto de grupo para la asignatura Sistemas de Big Data. El objetivo principal es diseñar e implementar un sistema automatizado para la recopilación, limpieza y almacenamiento de datos meteorológicos provenientes de diversas fuentes de datos. El fin último es crear un conjunto de datos robusto para un análisis posterior.
+Este repositorio contiene el proyecto de grupo para la asignatura Sistemas de Big Data. El objetivo es diseñar e implementar un sistema automatizado para la recopilación, limpieza y almacenamiento de datos meteorológicos provenientes de diversas fuentes de datos, creando un conjunto de datos robusto para un análisis posterior.
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
@@ -42,13 +42,9 @@ Hemos descartado algunas otras, basando la selección final y el diseño de la e
 
 - **Lenguaje:** Python 3.13
 - **Obtención de Datos:**
-  - `requests`: Para realizar las consultas a las APIs REST.
-- **Limpieza y Transformación:**
-  - `pandas`: Para la manipulación, limpieza y unificación de los datos.
+  - `requests`: para realizar las consultas a las APIs REST.
 - **Almacenamiento:**
-  _Alternativas a valorar:_
-  - **Opción 1 (Relacional):** PostgreSQL o MySQL (bueno para datos estructurados).
-  - **Opción 2 (NoSQL):** MongoDB (flexible para los JSON de las APIs) o InfluxDB (especializada en series temporales).
+  - `MongoDB (NoSQL)`: flexible para los JSON de las APIs.
 
 ---
 
@@ -56,17 +52,19 @@ Hemos descartado algunas otras, basando la selección final y el diseño de la e
 
 ```bash
 ├── scripts/ # Scripts para ETL (extracción, transformación, carga)
-│ ├── extract_meteo.py # API 1
-│ ├── extract_meteosource.py # API 2
-│ ├── transform.py
-│ └── load.py
-├── mongo/ # Configuración de la base de datos
+│ ├── __init__.py # Para conformar un paquete con la carpeta scripts, de forma que podamos usar imports relativos que luego main.py entienda.
+│ ├── extract_meteo.py # Extracción de datos, limpieza y carga a la BD (API 1)
+│ ├── extract_meteosource.py # Extracción de datos, limpieza y carga a la BD (API 2)
+│ ├── graficas.py # Ploteado de gráficas con los datos extraídos de las APIs
+│ └── mongo_connection.py # Interacción (lectura y escritura) con la BD Mongo
+├── graficas/ # Directorio de salida para las gráficas ploteadas, no subido a GitHub
+├── .env # Variables de entorno (no subida a GitHub)
 ├── .env.example # Plantilla para variables de entorno (API Keys)
 ├── .gitignore
+├── pyproject.toml
+├── main.py
 └── README.md
 ```
-
-> **Nota:** El directorio `/data/` (o similar) donde se almacenen los datos crudos o procesados se incluirá en el `.gitignore` para no subir los datos al repositorio, únicamente el código fuente.
 
 ---
 
@@ -74,6 +72,6 @@ Hemos descartado algunas otras, basando la selección final y el diseño de la e
 
 Para cumplir con el objetivo de trabajo colaborativo, se seguirá un flujo de trabajo básico con Git:
 
-1. No hacer `commit` directamente a la rama `main` (o `master`).
+1. No hacer `commit` directamente a la rama `master`.
 2. Crear **ramas** (`feature/`, `fix/`) para cada nueva funcionalidad o script (ej. `feature/api-openweather`).
-3. Realizar **Pull Requests (PRs)** para integrar los cambios en `main`.
+3. Realizar **Pull Requests (PRs)** para integrar los cambios en `master`.
