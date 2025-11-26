@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 from .mongo_connection import insert_data
 
 LAT = "37.3886" 
@@ -96,8 +96,9 @@ def obtencion_datos_open_meteo():
         hourly_data = []
         
         limit = 12 
-        
-        for i in range(min(len(hourly_raw["time"]), limit)):
+        current_hour = datetime.now().hour
+
+        for i in range(current_hour, min(len(hourly_raw["time"]), current_hour + limit)):
             h_slug, h_summary = get_weather_translation(hourly_raw["weather_code"][i])
             
             # Lógica para tipo de precipitación más precisa aquí
@@ -109,7 +110,7 @@ def obtencion_datos_open_meteo():
             )
 
             hourly_data.append({
-                "date": hourly_raw["time"][i],
+                "date": str(datetime.fromisoformat(hourly_raw["time"][i]).replace(tzinfo=timezone.utc)),
                 "weather": h_slug,
                 "temperature": hourly_raw["temperature_2m"][i],
                 "summary": h_summary,
