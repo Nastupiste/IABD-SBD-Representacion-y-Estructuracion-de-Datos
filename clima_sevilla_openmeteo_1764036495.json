@@ -1,0 +1,144 @@
+{
+    "lat": "37.3886",
+    "lon": "-5.9823",
+    "timestamp_captura": "2025-11-25 03:08:14",
+    "current": {
+        "temperature": 15.5,
+        "summary": "Overcast",
+        "icon": "overcast",
+        "wind": {
+            "speed": 10.5,
+            "angle": 254,
+            "dir": "WSW"
+        },
+        "precipitation": {
+            "total": 0.0,
+            "type": "none"
+        },
+        "cloud_cover": 92
+    },
+    "hourly": {
+        "data": [
+            {
+                "date": "2025-11-25T00:00",
+                "weather": "partly_sunny",
+                "temperature": 15.8,
+                "summary": "Partly sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T01:00",
+                "weather": "overcast",
+                "temperature": 15.7,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T02:00",
+                "weather": "overcast",
+                "temperature": 15.6,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T03:00",
+                "weather": "overcast",
+                "temperature": 15.5,
+                "summary": "Overcast",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T04:00",
+                "weather": "partly_sunny",
+                "temperature": 15.3,
+                "summary": "Partly sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T05:00",
+                "weather": "partly_sunny",
+                "temperature": 14.8,
+                "summary": "Partly sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T06:00",
+                "weather": "partly_sunny",
+                "temperature": 14.4,
+                "summary": "Partly sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T07:00",
+                "weather": "partly_sunny",
+                "temperature": 13.7,
+                "summary": "Partly sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T08:00",
+                "weather": "sunny",
+                "temperature": 12.3,
+                "summary": "Sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T09:00",
+                "weather": "sunny",
+                "temperature": 11.5,
+                "summary": "Sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T10:00",
+                "weather": "sunny",
+                "temperature": 12.9,
+                "summary": "Sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            },
+            {
+                "date": "2025-11-25T11:00",
+                "weather": "sunny",
+                "temperature": 14.4,
+                "summary": "Sunny",
+                "precipitation": {
+                    "total": 0.0,
+                    "type": "none"
+                }
+            }
+        ]
+    },
+    "_id": 

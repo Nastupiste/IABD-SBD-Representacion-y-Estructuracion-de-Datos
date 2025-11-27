@@ -1,14 +1,18 @@
-import time
-import json
+import os
+from dotenv import load_dotenv
 from datetime import datetime
 from pymeteosource.api import Meteosource
 from pymeteosource.types import tiers, sections, units, langs
+from .mongo_connection import insert_data
+
+load_dotenv()  # Cargar variables del archivo .env
 
 # Variables
-API_KEY = "kactprlujoa3p677acx480865izfqb0yvuer9ezb"
+API_KEY = os.getenv("METEOSOURCE_API_KEY")
 TIER = tiers.FREE
 LAT = "37.3886"
 LON = "-5.9823"
+COLLECTION_NAME = "meteosource"
 
 def obtencion_datos_api():
     try:
@@ -45,9 +49,20 @@ def obtencion_datos_api():
         }
 
         hourly_data = []
-        for i, hour in enumerate(forecast.hourly):
-            if i >= 12:
+        target_start_hour = datetime.now().hour
+        found_start = False
+
+        for hour in forecast.hourly:
+            # Buscamos la primera hora que coincida con la hora local actual
+            if not found_start:
+                if hour.date.hour == target_start_hour:
+                    found_start = True
+                else:
+                    continue
+
+            if len(hourly_data) >= 12:
                 break
+
             hourly_data.append({
                 "date": str(hour.date),
                 "weather": hour.weather,
@@ -69,16 +84,13 @@ def obtencion_datos_api():
             }
         }
 
-        print(f"Ubicación: Sevilla")
+        print("Ubicación: Sevilla")
         print(f"Temperatura: {forecast.current.temperature}ºC")
         print(f"Resumen: {forecast.current.summary}")
         print(f"Predicción futura: {len(hourly_data)} horas procesadas.")
-
-        nombre_archivo = f"clima_sevilla_{int(time.time())}.json"
-        with open(nombre_archivo, 'w', encoding='utf-8') as f:
-            json.dump(datos_finales, f, indent=4, ensure_ascii=False)
-
-        print(f"Datos guardados en {nombre_archivo}")
+        
+        # Insertar datos en MongoDB
+        insert_data(COLLECTION_NAME, datos_finales)
 
     except Exception as e:
         print(f"Error al obtener datos: {e}")

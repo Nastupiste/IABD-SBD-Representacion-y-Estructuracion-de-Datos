@@ -5,6 +5,8 @@ description = "Archivo de dependencias necesarias para el proyecto"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "matplotlib>=3.10.7",
     "pymeteosource>=1.7.0",
-    "pymongo>=4.15.4",
+    "pymongo[srv]",
+    "python-dotenv",
 ]
