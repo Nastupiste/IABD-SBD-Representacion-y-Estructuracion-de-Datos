@@ -1,6 +1,6 @@
 import json
-from scripts.mongo_connection import read_data
-from scripts.graficas import get_latest_document
+from scripts_1_7.mongo_connection import read_data
+from scripts_1_7.graficas import get_latest_document
 
 if __name__ == "__main__":
     print("OPENMETEO:")

@@ -1,9 +1,9 @@
-from scripts.mongo_connection import leer_todo
-from scripts.extract_meteo import obtencion_datos_open_meteo
-from scripts.extract_meteosource import (
+from scripts_1_7.mongo_connection import leer_todo
+from scripts_1_7.extract_meteo import obtencion_datos_open_meteo
+from scripts_1_7.extract_meteosource import (
     obtencion_datos_api as obtencion_datos_meteo_source,
 )
-from scripts.graficas import generate_plots_for_collection
+from scripts_1_7.graficas import generate_plots_for_collection
 
 COLECCIONES_MONGO = [
     "openmeteo",
