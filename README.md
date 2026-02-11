@@ -31,6 +31,8 @@ En la actividad 3.1, estos son los objetivos:
 
 - [ ] Paso 0. Base de datos.
   - [ ] Crear una nueva DB en MongoAtlas, la de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas.
+  - [ ] Crear y almacenar nuevo .env.
+  - [ ] Poblar la nueva DB, ¿una sola API?
 
 - [ ] Paso 1. Conexión.
   - [ ] Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7.
