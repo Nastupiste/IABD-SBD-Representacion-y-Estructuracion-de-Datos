@@ -30,35 +30,26 @@ En la actividad 3.1, estos son los objetivos:
 ## 👣 Pasos
 
 - [ ] Paso 1. Conexión.
-
-Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7., extrayendo los datos necesarios y cargándolos en un objeto de Polars, mediante read_database o conectores específicos.
+  - [ ] Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7.
+  - [ ] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
 
 - [ ] Paso 2. Limpieza y Estructuración con Polars.
+  - [ ] Tratamiento de valores nulos o inconsistentes.
+  - [ ] Creación de columnas calculadas (ej.: ratio salario/IPC).
+  - [ ] Agrupaciones (GroupBy) para segmentar la información (ej.: por provincias).
 
-Filtrar y limpiar la información:
-
-- Tratamiento de valores nulos o inconsistentes.
-
-- Creación de nuevas columnas calculadas (por ejemplo, el ratio salario/IPC o variaciones interanuales).
-
-- Agrupaciones (GroupBy) para segmentar la información por provincias, años o sectores.
-
-Al final de este proceso habrá varios dataframes para realizar un análisis o representación de los datos.
+Al final de este proceso habrá varios dataframes para un análisis o representación.
 
 - [ ] Paso 3. Generación de Dataframes para Informes.
+  - [ ] Exportar archivos CSV con el contenido de cada dataframe.
 
-Una vez procesados, el script exportará archivos CSV con el contenido de cada dataframe. Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista para ser consumida por otras herramientas.
+Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista para ser consumida por otras herramientas.
 
 - [ ] Paso 4. Análisis visual con Plotly.
-
-Con los datos ya estructurados, crear visualizaciones que cuenten una historia:
-
-- Gráficos de líneas interactivos para ver la evolución temporal.
-
-- Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
-
-- Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
+  - [ ] Gráficos de líneas interactivos para ver la evolución temporal.
+  - [ ] Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
+  - [ ] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
 
 - [ ] Paso 5. Documentación y Sincronización.
-
-Actualizar el repositorio de GitHub, incluyendo el requirements.txt con las librerías necesarias y documentando en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
+  - [ ] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
+  - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
