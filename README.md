@@ -1,8 +1,8 @@
-# Proyecto: Obtención y Almacenamiento de Datos Meteorológicos
+# REPRESENTACIÓN Y ESTRUCTURA DE DATOS
 
-![Banner para el README.md](assets/banner_readme.jpg)
+![Banner para el README.md](https://repository-images.githubusercontent.com/588181932/e36ec678-7984-4cdd-8e4c-a3932772ff8e)
 
-Este repositorio contiene el proyecto de grupo para la asignatura Sistemas de Big Data. El objetivo es diseñar e implementar un sistema automatizado para la recopilación, limpieza y almacenamiento de datos meteorológicos provenientes de diversas fuentes de datos, creando un conjunto de datos robusto para un análisis posterior.
+Repositorio para el proyecto de **Representación y Estructura de Datos** de la asignatura Sistemas de Big Data.
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
@@ -10,104 +10,17 @@ Este repositorio contiene el proyecto de grupo para la asignatura Sistemas de Bi
 
 - Andrés Prado Morgaz - [@andpramor](https://github.com/andpramor).
 - Manuel Jesús de la Rosa Cosano - [@Nastupiste](https://github.com/Nastupiste).
-- Tatiana López Velázquez - [@Tati314](https://github.com/Tati314).
-- Rubén Prieto Jurado - [@RubenPR2024](https://github.com/RubenPR2024).
 
 ---
 
 ## 🎯 Objetivos del Proyecto
 
-Siguiendo las directrices del proyecto, nuestros objetivos específicos para esta temática son:
+En la actividad 3.1, estos son los objetivos:
 
-1. **Consultar y Seleccionar Fuentes de Datos:** Investigar y comparar múltiples APIs meteorológicas (verificadas y con acceso automatizable) que sean relevantes para nuestro análisis (ej. datos históricos, pronósticos, etc.).
-2. **Evaluar Opciones de Almacenamiento:** Valorar diferentes tecnologías de almacenamiento (BBDD SQL, BBDD NoSQL) y seleccionar la más adecuada para datos de series temporales meteorológicas.
-3. **Diseñar la Estructura de Almacenamiento:** Definir el esquema de la base de datos que organice la información de manera eficiente, unificada y lista para el análisis.
-4. **Automatizar el Proceso:** Desarrollar scripts para la **Extracción** (consultas a las APIs), **Transformación** (limpieza, unificación de formatos, manejo de nulos) y **Carga** (almacenamiento en la BBDD elegida) de los datos.
-5. **Colaboración con Git:** Utilizar el flujo de trabajo de Git (branches, commits, pull requests) para gestionar el desarrollo del código de forma colaborativa.
+1. **Extraer información** de la fuente de datos creada anteriormente (MongoDB en nuestro caso) integrándola en un flujo de Python.
 
----
+2. Dominar la **manipulación de DataFrames** con Polars, aplicando filtros, agregaciones y transformaciones complejas.
 
-## 🌦️ Fuentes de Datos
+3. Diseñar **visualizaciones interactivas avanzadas** que permitan identificar tendencias, patrones y valores atípicos (outliers) en los datos sobre el poder adquisitivo y el empleo.
 
-Para cumplir con el requisito de "uso de diferentes fuentes de datos" y "fuentes de organismos contrastados", utilizaremos las siguientes APIs:
-
-- **[Open-Meteo](https://open-meteo.com/):** Una API abierta, sin necesidad de API key para uso no comercial. Ofrece datos globales y un amplio historial de datos.
-- **[Meteosource](https://www.meteosource.com/es/api-climatologica-actual):** Ofrece un plan grautito donde nos permite consultar tanto pronósticos actuales como futuros.
-
-Hemos descartado algunas otras, basando la selección final y el diseño de la extracción en la facilidad de uso, los límites de tasa (rate limiting) y la riqueza de los datos que ofrecen cada una.
-
----
-
-## 💻 Stack Tecnológico
-
-- **Lenguaje:** Python 3.13
-- **Obtención de Datos:**
-  - `requests`: para realizar las consultas a las APIs REST.
-- **Almacenamiento:**
-  - `MongoDB (NoSQL)`: flexible para los JSON de las APIs.
-
----
-
-## 📁 Estructura del Repositorio
-
-```bash
-├── scripts/ # Scripts para ETL (extracción, transformación, carga)
-│ ├── __init__.py # Para conformar un paquete con la carpeta scripts, de forma que podamos usar imports relativos que luego main.py entienda.
-│ ├── extract_meteo.py # Extracción de datos, limpieza y carga a la BD (API 1)
-│ ├── extract_meteosource.py # Extracción de datos, limpieza y carga a la BD (API 2)
-│ ├── graficas.py # Ploteado de gráficas con los datos extraídos de las APIs
-│ └── mongo_connection.py # Interacción (lectura y escritura) con la BD Mongo
-├── graficas/ # Directorio de salida para las gráficas ploteadas, no subido a GitHub
-├── .env # Variables de entorno (no subida a GitHub)
-├── .env.example # Plantilla para variables de entorno (API Keys)
-├── .gitignore
-├── pyproject.toml
-├── main.py
-└── README.md
-```
-
----
-
-## 🌊 Flujo de Trabajo con Git
-
-Para cumplir con el objetivo de trabajo colaborativo, se seguirá un flujo de trabajo básico con Git:
-
-1. No hacer `commit` directamente a la rama `master`.
-2. Crear **ramas** (`feature/`, `fix/`) para cada nueva funcionalidad o script (ej. `feature/api-openweather`).
-3. Realizar **Pull Requests (PRs)** para integrar los cambios en `master`.
-
----
-
-## 🔢 Instalación de dependencias
-
-### Utilizando la herramienta `uv` (como se ha hecho este proyecto)
-
-Tras clonar en local el repositorio, en terminal desde la raíz del proyecto:
-
-```bash
-uv sync
-```
-
-Esto genera un entorno virtual en la raíz del proyecto e instala las dependencias listadas en `pyproject.toml`.
-
-### Utilizando pip
-
-Generamos un entorno virtual (`python -m venv <nombre_del_entorno>`), lo activamos con `.\<nombre_del_entorno>\Scripts\activate` (Windows) o `source <nombre_del_entorno>/bin/activate` (MacOS o Linux).
-
-Hecho esto, ejecutamos:
-
-```bash
-pip install -r dependencies.txt
-```
-
-(Hemos generado manualmente dependencies.txt)
-
----
-
-## 💻 Ejecución del proyecto
-
-Con las dependencias instaladas y el entorno virtual activado, ejecutamos el archivo `main.py`:
-
-```bash
-python .\main.py
-```
+4. **Mantener el ciclo de vida del software** mediante el uso de forks en Git y GitHub para la colaboración y el control de versiones.
