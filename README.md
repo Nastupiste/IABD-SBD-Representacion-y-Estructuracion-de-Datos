@@ -29,6 +29,9 @@ En la actividad 3.1, estos son los objetivos:
 
 ## 👣 Pasos
 
+- [ ] Paso 0. Base de datos.
+  - [ ] Crear una nueva DB en MongoAtlas, la de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas.
+
 - [ ] Paso 1. Conexión.
   - [ ] Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7.
   - [ ] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
