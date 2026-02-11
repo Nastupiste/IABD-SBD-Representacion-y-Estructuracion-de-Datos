@@ -1,8 +1,6 @@
-# REPRESENTACIÓN Y ESTRUCTURA DE DATOS
+# SISTEMAS DE BIG DATA
 
 ![Banner para el README.md](https://repository-images.githubusercontent.com/588181932/e36ec678-7984-4cdd-8e4c-a3932772ff8e)
-
-Repositorio para el proyecto de **Representación y Estructura de Datos** de la asignatura Sistemas de Big Data.
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
@@ -13,7 +11,9 @@ Repositorio para el proyecto de **Representación y Estructura de Datos** de la 
 
 ---
 
-## 🎯 Objetivos del Proyecto
+## 3.1. Representación y Estructura de Datos
+
+### 🎯 Objetivos
 
 En la actividad 3.1, estos son los objetivos:
 
@@ -27,7 +27,7 @@ En la actividad 3.1, estos son los objetivos:
 
 ---
 
-## 👣 Pasos
+### 👣 Pasos
 
 - [ ] Paso 0. Base de datos.
   - [ ] Crear una nueva DB en MongoAtlas, la de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas.
