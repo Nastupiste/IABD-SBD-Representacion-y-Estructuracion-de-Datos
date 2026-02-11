@@ -17,10 +17,46 @@ Repositorio para el proyecto de **Representación y Estructura de Datos** de la 
 
 En la actividad 3.1, estos son los objetivos:
 
-1. **Extraer información** de la fuente de datos creada anteriormente (MongoDB en nuestro caso) integrándola en un flujo de Python.
+1. **Extraer** información de la fuente de datos creada anteriormente (MongoDB en nuestro caso) integrándola en un flujo de Python.
 
-2. Dominar la **manipulación de DataFrames** con Polars, aplicando filtros, agregaciones y transformaciones complejas.
+2. **Dominar la manipulación de DataFrames con Polars**, aplicando filtros, agregaciones y transformaciones complejas.
 
-3. Diseñar **visualizaciones interactivas avanzadas** que permitan identificar tendencias, patrones y valores atípicos (outliers) en los datos sobre el poder adquisitivo y el empleo.
+3. **Diseñar visualizaciones interactivas avanzadas** que permitan identificar tendencias, patrones y valores atípicos (outliers) en los datos sobre el poder adquisitivo y el empleo.
 
 4. **Mantener el ciclo de vida del software** mediante el uso de forks en Git y GitHub para la colaboración y el control de versiones.
+
+## 👣 Pasos
+
+- [ ] Paso 1. Conexión.
+
+Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7., extrayendo los datos necesarios y cargándolos en un objeto de Polars, mediante read_database o conectores específicos.
+
+- [ ] Paso 2. Limpieza y Estructuración con Polars.
+
+Filtrar y limpiar la información:
+
+- Tratamiento de valores nulos o inconsistentes.
+
+- Creación de nuevas columnas calculadas (por ejemplo, el ratio salario/IPC o variaciones interanuales).
+
+- Agrupaciones (GroupBy) para segmentar la información por provincias, años o sectores.
+
+Al final de este proceso habrá varios dataframes para realizar un análisis o representación de los datos.
+
+- [ ] Paso 3. Generación de Dataframes para Informes.
+
+Una vez procesados, el script exportará archivos CSV con el contenido de cada dataframe. Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista para ser consumida por otras herramientas.
+
+- [ ] Paso 4. Análisis visual con Plotly.
+
+Con los datos ya estructurados, crear visualizaciones que cuenten una historia:
+
+- Gráficos de líneas interactivos para ver la evolución temporal.
+
+- Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
+
+- Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
+
+- [ ] Paso 5. Documentación y Sincronización.
+
+Actualizar el repositorio de GitHub, incluyendo el requirements.txt con las librerías necesarias y documentando en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
