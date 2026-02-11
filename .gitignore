@@ -14,3 +14,6 @@ wheels/
 
 # Gráficas generadas
 graficas/
+
+# Data
+data/
