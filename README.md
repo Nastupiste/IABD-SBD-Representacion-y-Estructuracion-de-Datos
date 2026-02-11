@@ -25,6 +25,8 @@ En la actividad 3.1, estos son los objetivos:
 
 4. **Mantener el ciclo de vida del software** mediante el uso de forks en Git y GitHub para la colaboración y el control de versiones.
 
+---
+
 ## 👣 Pasos
 
 - [ ] Paso 1. Conexión.
