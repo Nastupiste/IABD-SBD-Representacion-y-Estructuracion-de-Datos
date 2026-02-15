@@ -1,7 +1,14 @@
+from scripts_3_1.db_connector import get_polars_dataframe
+
 def main():
     print(
         "Paso 1: llamar a scripts_3_1/db_connector.py para obtener los datos de MongoDB en un objeto de Polars."
     )
+
+    df = get_polars_dataframe("openmeteo")
+    if df is not None:
+        print("Datos extraídos:")
+        print(df.head())
 
     print(
         "Paso 2: llamar a scripts_3_1/data_processor.py, clean_data() para transformar los datos y obtener un nuevo objeto de Polars."

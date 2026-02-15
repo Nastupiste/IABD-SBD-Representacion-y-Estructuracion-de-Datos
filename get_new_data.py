@@ -1,5 +1,5 @@
 from scripts_1_7_weather_apis.db_connection import read_table
-from scripts_1_7_weather_apis.extract_meteo import get_open_meteo
+from scripts_1_7_weather_apis.extract_openmeteo import get_open_meteo
 from scripts_1_7_weather_apis.extract_meteosource import get_meteosource
 
 TABLES = [

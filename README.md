@@ -30,20 +30,20 @@ En la actividad 3.1, estos son los objetivos:
 ### 👣 Pasos
 
 - [ ] Paso 0. Prerrequisitos: Base de datos.
-  - [ ] Adaptar el ejercicio a sqlite3 (la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas).
-  - [ ] Crear y almacenar nuevo .env.
-  - [ ] Poblar la nueva Base de Datos, ¿una sola API?
+  - [x] Adaptar el ejercicio a sqlite3 (la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas).
+  - [x] Poblar la nueva Base de Datos.
   - [x] Añadir a este README las instrucciones para instalar las dependencias de este proyecto.
   - [ ] Añadir LAT y LON para más ciudades.
 
-- [ ] Paso 1. Conexión.
-  - [ ] Establecer la conexión entre el entorno de Python y la base de datos.
-  - [ ] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
+- [x] Paso 1. Conexión.
+  - [x] Establecer la conexión entre el entorno de Python y la base de datos.
+  - [x] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
 
 - [ ] Paso 2. Limpieza y Estructuración con Polars.
   - [ ] Tratamiento de valores nulos o inconsistentes.
   - [ ] Creación de columnas calculadas (ej.: ratio salario/IPC).
   - [ ] Agrupaciones (GroupBy) para segmentar la información (ej.: por provincias).
+  - [ ] DUDA: ¿Los datos se duplican al correr varias veces la extracción? Si la api responde las últimas 12 horas, si se ejecuta de nuevo en menos de 12 horas, ¿tendremos dos ID distintos con la misma información?
 
 Al final de este proceso habrá varios dataframes para un análisis o representación.
 
