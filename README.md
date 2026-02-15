@@ -1,4 +1,4 @@
-# SISTEMAS DE BIG DATA
+# SISTEMAS DE BIG DATA: Análisis y cuadros de mando
 
 ![Banner para el README.md](https://repository-images.githubusercontent.com/588181932/e36ec678-7984-4cdd-8e4c-a3932772ff8e)
 
@@ -17,7 +17,7 @@
 
 En la actividad 3.1, estos son los objetivos:
 
-1. **Extraer** información de la fuente de datos creada anteriormente (MongoDB en nuestro caso) integrándola en un flujo de Python.
+1. **Extraer** información de la fuente de datos creada anteriormente integrándola en un flujo de Python.
 
 2. **Dominar la manipulación de DataFrames con Polars**, aplicando filtros, agregaciones y transformaciones complejas.
 
@@ -30,10 +30,10 @@ En la actividad 3.1, estos son los objetivos:
 ### 👣 Pasos
 
 - [ ] Paso 0. Base de datos.
-  - [ ] Adaptar el ejercicio a sqlite3, la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas.
+  - [ ] Adaptar el ejercicio a sqlite3 (la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas).
   - [ ] Crear y almacenar nuevo .env.
   - [ ] Poblar la nueva Base de Datos, ¿una sola API?
-  - [ ] Añadir a este README las instrucciones para utilizar este proyecto con UV en lugar de pip, como en el 1.7.
+  - [x] Añadir a este README las instrucciones para instalar las dependencias de este proyecto.
 
 - [ ] Paso 1. Conexión.
   - [ ] Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7.
@@ -59,3 +59,44 @@ Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista p
 - [ ] Paso 5. Documentación y Sincronización.
   - [ ] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
   - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
+
+- [ ] Final. Revisar documentación.
+  - [ ] README completo.
+  - [ ] `requirements.txt` actualizado.
+  - [ ] Análisis de los resultados incluido en README.
+
+---
+
+## 🔢 Instalación de dependencias
+
+### Utilizando la herramienta `uv` (como se ha hecho este proyecto)
+
+Tras clonar el repositorio en local, abrimos una terminal en la raíz del proyecto y ejecutamos:
+
+```bash
+uv sync
+```
+
+Esto genera un entorno virtual en la raíz del proyecto e instala las dependencias listadas en `pyproject.toml`.
+
+### Utilizando pip
+
+Generamos un entorno virtual (`python -m venv <nombre_del_entorno>`), lo activamos con `.\<nombre_del_entorno>\Scripts\activate` (Windows) o `source <nombre_del_entorno>/bin/activate` (MacOS o Linux).
+
+Hecho esto, ejecutamos:
+
+```bash
+pip install -r requirements.txt
+```
+
+> NOTA: Hemos generado el archivo `requirements.txt` utilizando el comando de uv `uv export --format requirements-txt --no-hashes --no-annotate --no-header --output-file requirements.txt`.
+
+---
+
+## 💻 Ejecución del proyecto
+
+Con las dependencias instaladas y el entorno virtual activado, ejecutamos el archivo `main.py`:
+
+```bash
+python .\main.py
+```

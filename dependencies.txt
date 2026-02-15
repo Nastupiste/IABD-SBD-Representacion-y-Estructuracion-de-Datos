@@ -1,5 +1,0 @@
-matplotlib>=3.10.7
-pymeteosource>=1.7.0
-pymongo[srv]
-python-dotenv
-polars>=1.38.1
