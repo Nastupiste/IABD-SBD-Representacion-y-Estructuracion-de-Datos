@@ -1,4 +1,4 @@
-# SISTEMAS DE BIG DATA: Análisis y cuadros de mando
+<h1 align="center">Análisis y cuadros de mando</h1>
 
 ![Banner para el README.md](https://repository-images.githubusercontent.com/588181932/e36ec678-7984-4cdd-8e4c-a3932772ff8e)
 
@@ -70,7 +70,7 @@ Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista p
 
 ## 🔢 Instalación de dependencias
 
-### Utilizando la herramienta `uv` (como se ha hecho este proyecto)
+### Utilizando `uv`
 
 Tras clonar el repositorio en local, abrimos una terminal en la raíz del proyecto y ejecutamos:
 
@@ -80,7 +80,7 @@ uv sync
 
 Esto genera un entorno virtual en la raíz del proyecto e instala las dependencias listadas en `pyproject.toml`.
 
-### Utilizando pip
+### Utilizando `pip`
 
 Generamos un entorno virtual (`python -m venv <nombre_del_entorno>`), lo activamos con `.\<nombre_del_entorno>\Scripts\activate` (Windows) o `source <nombre_del_entorno>/bin/activate` (MacOS o Linux).
 
@@ -90,7 +90,11 @@ Hecho esto, ejecutamos:
 pip install -r requirements.txt
 ```
 
-> NOTA: Hemos generado el archivo `requirements.txt` utilizando el comando de uv `uv export --format requirements-txt --no-hashes --no-annotate --no-header --output-file requirements.txt`.
+> NOTA: Hemos utilizado `uv`, por lo que hemos generado el archivo `requirements.txt` de este proyecto ejecutando:
+
+```bash
+uv export --format requirements-txt --no-hashes --no-annotate --no-header --output-file requirements.txt
+```
 
 ---
 
