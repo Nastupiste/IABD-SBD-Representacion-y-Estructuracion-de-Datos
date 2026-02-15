@@ -31,7 +31,7 @@ def clean_nulls(df):
 
 def export_to_csv(df, filename):
     """Exportar un DataFrame de Polars a CSV."""
-    output_dir = f"{BASE_DIR}/data/silver_layer"  # Directorio de salida para los CSVs
+    output_dir = f"{BASE_DIR}/data_output/silver_layer"  # Directorio de salida para los CSVs
     os.makedirs(output_dir, exist_ok=True)  # Crear el directorio si no existe
 
     full_path = f"{output_dir}/{filename}.csv"

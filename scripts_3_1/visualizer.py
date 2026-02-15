@@ -11,9 +11,9 @@ from scripts_1_7_weather_apis.db_connection import BASE_DIR
 BASE_PATH = Path(BASE_DIR)
 
 DIRS = {
-    "DAILY_STATS": BASE_PATH / "data" / "silver_layer" / "Estadísticas_diarias.csv",
-    "HOURLY_WEATHER": BASE_PATH / "data" / "silver_layer" / "Tiempo_por_horas.csv",
-    "CURRENT_WEATHER": BASE_PATH / "data" / "silver_layer" / "Tiempo_actual.csv",
+    "DAILY_STATS": BASE_PATH / "data_output" / "silver_layer" / "Estadísticas_diarias.csv",
+    "HOURLY_WEATHER": BASE_PATH / "data_output" / "silver_layer" / "Tiempo_por_horas.csv",
+    "CURRENT_WEATHER": BASE_PATH / "data_output" / "silver_layer" / "Tiempo_actual.csv",
 }
 
 

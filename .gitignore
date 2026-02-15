@@ -16,5 +16,4 @@ wheels/
 graficas/
 
 # Data
-data/
 *.db

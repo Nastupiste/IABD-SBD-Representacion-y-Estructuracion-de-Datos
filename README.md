@@ -71,6 +71,13 @@ Hemos generado cuatro visualizaciones:
 
 La conclusión que podemos extraer por ahora, es que las variables temperatura media del día y precipitaciones total del mismo día no están correlacionadas, pero hay que tener en cuenta que estamos limitados a una predicción de los próximos siete días, por lo que aún no podemos hacer un análisis muy fiable.
 
+### ENTREGA 3.1. REPRESENTACIÓN Y ESTRUCTURA
+
+- Scripts de python: `main.py`, carpeta scripts_3_1 y carpeta scripts_1_7_weather_apis de este repositorio, que incluye el código de la actividad 1.7 del que partimos, muy modificado para esta actividad.
+- Carpeta data_output/ con los csv generados: incluida en este repositorio.
+- Exportaciones de los gráficos: plots.html y carpeta plots_files de este repositorio.
+- Breve informe final: el punto anterior de este README (Visualizaciones generadas).
+
 ---
 
 ## 🔢 Instalación de dependencias
@@ -108,5 +115,5 @@ uv export --format requirements-txt --no-hashes --no-annotate --no-header --outp
 Con las dependencias instaladas y el entorno virtual activado, ejecutamos el archivo `main.py`:
 
 ```bash
-python .\main.py
+python main.py
 ```
