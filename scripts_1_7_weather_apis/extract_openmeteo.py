@@ -75,7 +75,7 @@ def get_open_meteo():
         "current": "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,precipitation,cloud_cover",
         "hourly": "temperature_2m,weather_code,precipitation,rain,showers,snowfall",
         "timezone": "auto",
-        "forecast_days": 1,
+        "forecast_days": 7,
     }
 
     try:
@@ -113,12 +113,7 @@ def get_open_meteo():
         hourly_raw = data["hourly"]
         hourly_data = []
 
-        limit = 12
-        current_hour = datetime.now().hour
-
-        for i in range(
-            current_hour, min(len(hourly_raw["time"]), current_hour + limit)
-        ):
+        for i in range(len(hourly_raw["time"])):
             h_slug, h_summary = get_weather_translation(hourly_raw["weather_code"][i])
 
             # Lógica para tipo de precipitación más precisa aquí

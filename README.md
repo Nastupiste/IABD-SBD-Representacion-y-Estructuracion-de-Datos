@@ -42,11 +42,12 @@ En la actividad 3.1, estos son los objetivos:
   - [x] Tratamiento de valores nulos o inconsistentes.
   - [x] Creación de columnas calculadas: hemos creado columnas para temperatura máxima, mínima y mediana.
   - [x] Agrupaciones (GroupBy) para segmentar la información: lo hemos hecho por ID en df_stats.
-- DUDA: Agrupaciones ¿Añadimos por años?
-- DUDA: ¿Los datos se duplican al correr varias veces la extracción en menos de 12 horas (la API nos da el hourly de 12 horas)? En main.py hay una línea comentada para hacer una extracción nueva.
+        DUDA: Agrupaciones ¿Añadimos por años?
+        DUDA: ¿Los datos se duplican al correr varias veces la extracción en menos de 12 horas (la API nos da el hourly de 12 horas)? En main.py hay una línea comentada para hacer una extracción nueva.
 
-- [x] **Paso 3**. Generación de Dataframes para Informes.
+- [ ] **Paso 3**. Generación de Dataframes para Informes.
   - [x] Exportar archivos CSV con el contenido de cada dataframe.
+  - [ ] Modificar exportación para añadir datos a los existentes en los casos acumulativos (current no, el resto sí).
 
 - [ ] **Paso 4**. Análisis visual con Plotly.
   - [ ] Gráficos de líneas interactivos para ver la evolución temporal.
@@ -55,7 +56,6 @@ En la actividad 3.1, estos son los objetivos:
 
 - [ ] **Paso 5**. Documentación y Sincronización.
   - [x] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
-  - [ ] Volver a actualizar `requirements.txt` al incluir Plotly.
   - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
 
 - [ ] **Final**. Revisar documentación.

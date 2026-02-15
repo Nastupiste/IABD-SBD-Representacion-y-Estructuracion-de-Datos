@@ -10,7 +10,7 @@ from scripts_3_1.data_processor import (
 
 TABLES = [
     "openmeteo",
-    "meteosource",
+    # "meteosource",
 ]
 
 
@@ -20,7 +20,8 @@ def get_new_data():
     for table in TABLES:
         read_table(table)
 
-    print("\n\n --- Pidiendo nuevos datos a ambas APIs --- \n\n")
+    # print("\n\n --- Pidiendo nuevos datos a ambas APIs --- \n\n")
+    print("\n\n --- Pidiendo nuevos datos a la API de OpenMeteo --- \n\n")
 
     get_open_meteo()
 

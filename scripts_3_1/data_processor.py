@@ -118,14 +118,21 @@ def get_stats_dataframe(df):
     """
     df = clean_nulls(df)
     df_stats = (
-        df.select(["id", "hourly"])
+        df.select(["hourly"])
         .drop_nulls("hourly")  # LIMPIEZA: Eliminar filas donde 'hourly' es nulo.
         .unnest("hourly")
         .explode("data")
         .unnest("data")
+        # 1. Convertimos el string 'date' a datetime y luego extraemos solo la fecha (Date)
+        .with_columns(
+            pl.col("date")
+            .str.to_datetime(time_unit="ms", time_zone="UTC")
+            .dt.date()
+            .alias("date_no_time")
+        )
         # LIMPIEZA: Antes de agrupar, eliminamos filas con temperaturas nulas.
         .filter(pl.col("temperature").is_not_null())
-        .group_by("id")
+        .group_by("date_no_time")
         .agg(
             [
                 pl.col("temperature")
@@ -146,9 +153,10 @@ def get_stats_dataframe(df):
                 .alias("precip_total_diaria"),
             ]
         )
+        .sort("date_no_time")
     )
 
-    export_to_csv(df_stats, "Estadísticas_diarias_por_ID")
+    export_to_csv(df_stats, "Estadísticas_diarias")
 
     return df_stats
 
