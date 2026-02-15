@@ -4,7 +4,7 @@
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
-<h2 align="center">👥 Miembros del Equipo</h2>
+## 👥 Miembros del Equipo
 
 - Andrés Prado Morgaz - [@andpramor](https://github.com/andpramor).
 - Manuel Jesús de la Rosa Cosano - [@Nastupiste](https://github.com/Nastupiste).
