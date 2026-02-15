@@ -75,14 +75,14 @@ def get_polars_dataframe(table_name):
         if not df.is_empty():
             schema = get_weather_schema()
             # 1. Decodificar el JSON con el esquema manual
-            df = df.with_columns(pl.col("payload").str.json_decode(dtype=schema))
+            df = df.with_columns(
+                pl.col("payload").str.json_decode(dtype=schema)
+            ).unnest("payload")
             return df
         return df
     except Exception as e:
         print(f"Error: {e}")
         return None
-
-
 
 
 if __name__ == "__main__":

@@ -1,9 +1,35 @@
+from scripts_1_7_weather_apis.db_connection import read_table
+from scripts_1_7_weather_apis.extract_openmeteo import get_open_meteo
+from scripts_1_7_weather_apis.extract_meteosource import get_meteosource
 from scripts_3_1.db_connector import get_polars_dataframe
 from scripts_3_1.data_processor import (
-    get_hourly_weather,
-    get_current_weather,
-    get_stats,
+    get_hourly_weather_dataframe,
+    get_current_weather_dataframe,
+    get_stats_dataframe,
 )
+
+TABLES = [
+    "openmeteo",
+    "meteosource",
+]
+
+
+def get_new_data():
+    print("Datos guardados:")
+
+    for table in TABLES:
+        read_table(table)
+
+    print("\n\n --- Pidiendo nuevos datos a ambas APIs --- \n\n")
+
+    get_open_meteo()
+
+    get_meteosource()
+
+    print("\n --- \nDatos actualizados:")
+
+    for table in TABLES:
+        read_table(table)
 
 
 def start_step(description):
@@ -20,6 +46,14 @@ def end_step():
 
 
 def main():
+
+    print("INICIO DEL PROCESO DE ANÁLISIS DE DATOS CLIMÁTICOS\n")
+    print(
+        "La base de datos debe tener datos ya, si no es así, descomentar la siguiente línea:"
+    )
+
+    # get_new_data()
+
     start_step(
         "Paso 1: CONEXIÓN: Obtener un objeto de Polars con los datos de la tabla 'openmeteo' usando read_database."
     )
@@ -31,14 +65,14 @@ def main():
     end_step()
 
     start_step(
-        "Paso 2: LIMPIEZA Y ESTRUCTURACIÓN CON POLARS: nulos, columnas calculadas y agrupaciones."
+        "Pasos 2 y 3: LIMPIEZA Y ESTRUCTURACIÓN CON POLARS: limpiar nulos e inconsistencias, añadir columnas calculadas y agrupaciones."
     )
 
     if df is not None:
 
-        df_hourly = get_hourly_weather(df)
-        df_current = get_current_weather(df)
-        df_stats = get_stats(df)
+        df_hourly = get_hourly_weather_dataframe(df)
+        df_current = get_current_weather_dataframe(df)
+        df_stats = get_stats_dataframe(df)
 
         print("--- VISTA DEL PRONÓSTICO POR HORAS ---\n")
         print(df_hourly.head(10))
@@ -51,17 +85,7 @@ def main():
 
     end_step()
 
-    start_step(
-        "Paso 3: llamar a scripts_3_1/data_processor.py, create_columns() y structure_data()\npara crear nuevas columnas calculadas y agrupadas."
-    )
-
-    print("---- PENDIENTE ----")
-
-    end_step()
-
-    start_step(
-        "Paso 4: llamar a scripts_3_1/visualizer.py para generar gráficos con Plotly."
-    )
+    start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
 
     print("---- PENDIENTE ----")
 

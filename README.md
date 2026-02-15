@@ -38,17 +38,17 @@ En la actividad 3.1, estos son los objetivos:
   - [x] Establecer la conexión entre el entorno de Python y la base de datos.
   - [x] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
 
-- [ ] Paso 2. Limpieza y Estructuración con Polars.
-  - [ ] Tratamiento de valores nulos o inconsistentes.
+- [x] Paso 2. Limpieza y Estructuración con Polars.
+  - [x] Tratamiento de valores nulos o inconsistentes.
   - [x] Creación de columnas calculadas: hemos creado columnas para temperatura máxima, mínima y mediana.
   - [x] Agrupaciones (GroupBy) para segmentar la información: lo hemos hecho por ID.
-  - Agrupaciones TODO: Añadir por años.
-  - DUDA: ¿Los datos se duplican al correr varias veces la extracción? Si la api responde las últimas 12 horas, si se ejecuta de nuevo en menos de 12 horas, ¿tendremos dos ID distintos con la misma información?
+- DUDA: Agrupaciones ¿Añadimos por años?
+- DUDA: ¿Los datos se duplican al correr varias veces la extracción en menos de 12 horas (la API nos da el hourly de 12 horas)?
 
 Al final de este proceso habrá varios dataframes para un análisis o representación.
 
-- [ ] Paso 3. Generación de Dataframes para Informes.
-  - [ ] Exportar archivos CSV con el contenido de cada dataframe.
+- [x] Paso 3. Generación de Dataframes para Informes.
+  - [x] Exportar archivos CSV con el contenido de cada dataframe.
 
 Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista para ser consumida por otras herramientas.
 
@@ -58,12 +58,12 @@ Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista p
   - [ ] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
 
 - [ ] Paso 5. Documentación y Sincronización.
-  - [ ] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
+  - [x] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
   - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
 
 - [ ] Final. Revisar documentación.
   - [ ] README completo.
-  - [ ] `requirements.txt` actualizado.
+  - [x] `requirements.txt` actualizado.
   - [ ] Análisis de los resultados incluido en README.
 
 ---
