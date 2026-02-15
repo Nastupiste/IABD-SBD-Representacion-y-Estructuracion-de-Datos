@@ -83,70 +83,10 @@ def get_polars_dataframe(table_name):
         return None
 
 
-def get_hourly_forecast(df):
-    """Obtener un DataFrame de Polars con los datos del tiempo extraidos por franja horaria."""
-    return (
-        df.select(["id", "payload"])
-        .unnest("payload")
-        .select(["id", "timestamp_captura", "hourly"])
-        .unnest("hourly")
-        .explode("data")
-        .unnest("data")
-    )
-
-
-def get_current_weather(df):
-    """Obtener un DataFrame de Polars con los datos del tiempo actual."""
-    return (
-        df.sort("id", descending=True)  # Ordenamos por ID (el último insertado arriba)
-        .limit(1)  # Nos quedamos solo con el primero, para coger el "current" de la fila más reciente
-        .unnest("payload")
-        .select(["timestamp_captura", "current"])
-        .unnest("current")
-    )
-
-
-def get_stats(df):
-    """
-    Obtener un DataFrame de Polars con estadísticas apor ID (máximo, mínimo, promedio de temperatura y total de precipitación diaria).
-    """
-    return (
-        df.select(["id", "payload"])
-        .unnest("payload")
-        .select(["id", "hourly"])
-        .unnest("hourly")
-        .explode("data")
-        .unnest("data")
-        .group_by("id")
-        .agg(
-            [
-                pl.col("temperature").max().alias("temp_max"),
-                pl.col("temperature").min().alias("temp_min"),
-                pl.col("temperature").mean().alias("temp_avg"),
-                pl.col("precipitation")
-                .struct.field("total")
-                .sum()
-                .alias("precip_total_diaria"),
-            ]
-        )
-    )
 
 
 if __name__ == "__main__":
     df = get_polars_dataframe("openmeteo")
 
     if df is not None:
-        # Ejemplo: Extraer los datos horarios a un formato plano (Long Format)
-        # Esto 'explota' la lista de horas para que cada hora sea una fila
-        df_hourly = get_hourly_forecast(df)
-        df_current = get_current_weather(df)
-        df_stats = get_stats(df)
-
-        print("--- VISTA DEL PRONÓSTICO POR HORAS ---")
-        print(df_hourly.head(10))
-
-        print("--- VISTA DEL CLIMA ACTUAL ---")
-        print(df_current.head(10))
-
-        print("--- VISTA DE ESTADÍSTICAS POR ID ---")
-        print(df_stats.head(10))
+        print(df)
