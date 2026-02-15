@@ -1,10 +1,10 @@
-<h1 align="center">Análisis y cuadros de mando</h1>
+<h1 align="center">ANÁLISIS Y CUADROS DE MANDO</h1>
 
 ![Banner para el README.md](https://repository-images.githubusercontent.com/588181932/e36ec678-7984-4cdd-8e4c-a3932772ff8e)
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
-## 👥 Miembros del Equipo
+<h2 align="center">👥 Miembros del Equipo</h2>
 
 - Andrés Prado Morgaz - [@andpramor](https://github.com/andpramor).
 - Manuel Jesús de la Rosa Cosano - [@Nastupiste](https://github.com/Nastupiste).
