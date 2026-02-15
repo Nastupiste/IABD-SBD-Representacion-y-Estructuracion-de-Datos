@@ -29,40 +29,36 @@ En la actividad 3.1, estos son los objetivos:
 
 ### 👣 Pasos
 
-- [x] Paso 0. Prerrequisitos: Base de datos.
+- [x] **Paso 0**. Prerrequisitos: Base de datos.
   - [x] Adaptar el ejercicio a sqlite3 (la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas).
   - [x] Poblar la nueva Base de Datos.
   - [x] Documentar en este README cómo instalar las dependencias de este proyecto.
 
-- [x] Paso 1. Conexión.
+- [x] **Paso 1**. Conexión.
   - [x] Establecer la conexión entre el entorno de Python y la base de datos.
   - [x] Extraer datos y cargarlos en un objeto de Polars (utilizando el método de Polars: read_database).
 
-- [x] Paso 2. Limpieza y Estructuración con Polars.
+- [x] **Paso 2**. Limpieza y Estructuración con Polars.
   - [x] Tratamiento de valores nulos o inconsistentes.
   - [x] Creación de columnas calculadas: hemos creado columnas para temperatura máxima, mínima y mediana.
   - [x] Agrupaciones (GroupBy) para segmentar la información: lo hemos hecho por ID en df_stats.
 - DUDA: Agrupaciones ¿Añadimos por años?
 - DUDA: ¿Los datos se duplican al correr varias veces la extracción en menos de 12 horas (la API nos da el hourly de 12 horas)? En main.py hay una línea comentada para hacer una extracción nueva.
 
-Al final de este proceso habrá varios dataframes para un análisis o representación.
-
-- [x] Paso 3. Generación de Dataframes para Informes.
+- [x] **Paso 3**. Generación de Dataframes para Informes.
   - [x] Exportar archivos CSV con el contenido de cada dataframe.
 
-Cada CSV debe tener una finalidad clara, formando la "capa de plata/oro" lista para ser consumida por otras herramientas.
-
-- [ ] Paso 4. Análisis visual con Plotly.
+- [ ] **Paso 4**. Análisis visual con Plotly.
   - [ ] Gráficos de líneas interactivos para ver la evolución temporal.
   - [ ] Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
   - [ ] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
 
-- [ ] Paso 5. Documentación y Sincronización.
+- [ ] **Paso 5**. Documentación y Sincronización.
   - [x] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
   - [ ] Volver a actualizar `requirements.txt` al incluir Plotly.
   - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
 
-- [ ] Final. Revisar documentación.
+- [ ] **Final**. Revisar documentación.
   - [ ] README completo.
   - [x] `requirements.txt` actualizado.
   - [ ] Análisis de los resultados incluido en README.
