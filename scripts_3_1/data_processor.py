@@ -1,6 +1,5 @@
 import os
 import polars as pl
-from datetime import datetime
 from scripts_1_7_weather_apis.db_connection import BASE_DIR
 from .db_connector import get_polars_dataframe
 
@@ -32,11 +31,10 @@ def clean_nulls(df):
 
 def export_to_csv(df, filename):
     """Exportar un DataFrame de Polars a CSV."""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M")  # AñoMesDia_HoraMinuto
     output_dir = f"{BASE_DIR}/data/silver_layer"  # Directorio de salida para los CSVs
     os.makedirs(output_dir, exist_ok=True)  # Crear el directorio si no existe
 
-    full_path = f"{output_dir}/{filename}_{timestamp}.csv"
+    full_path = f"{output_dir}/{filename}.csv"
 
     df.write_csv(full_path)
     print(f"Archivo exportado correctamente: {full_path}")

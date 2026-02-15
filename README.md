@@ -50,8 +50,8 @@ En la actividad 3.1, estos son los objetivos:
   - [ ] Modificar exportación para añadir datos a los existentes en los casos acumulativos (current no, el resto sí).
 
 - [ ] **Paso 4**. Análisis visual con Plotly.
-  - [ ] Gráficos de líneas interactivos para ver la evolución temporal.
-  - [ ] Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
+  - [x] Gráficos de líneas interactivos para ver la evolución temporal.
+  - [x] Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
   - [ ] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
 
 - [ ] **Paso 5**. Documentación y Sincronización.

@@ -7,6 +7,7 @@ from scripts_3_1.data_processor import (
     get_current_weather_dataframe,
     get_stats_dataframe,
 )
+from scripts_3_1.visualizer import plot_combined_dashboard
 
 TABLES = [
     "openmeteo",
@@ -49,10 +50,8 @@ def end_step():
 def main():
 
     print("INICIO DEL PROCESO DE ANÁLISIS DE DATOS CLIMÁTICOS\n")
-    print(
-        "La base de datos debe tener datos ya, si no es así, descomentar la siguiente línea:"
-    )
 
+    # ==== La base de datos debe tener datos ya, si no es así, descomentar la siguiente línea ====
     # get_new_data()
 
     start_step(
@@ -88,7 +87,9 @@ def main():
 
     start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
 
-    print("---- PENDIENTE ----")
+    print("Abriendo dashboard combinado con 4 gráficos diferentes...")
+
+    plot_combined_dashboard()
 
     end_step()
 
