@@ -45,23 +45,31 @@ En la actividad 3.1, estos son los objetivos:
         DUDA: Agrupaciones ¿Añadimos por años?
         DUDA: ¿Los datos se duplican al correr varias veces la extracción en menos de 12 horas (la API nos da el hourly de 12 horas)? En main.py hay una línea comentada para hacer una extracción nueva.
 
-- [ ] **Paso 3**. Generación de Dataframes para Informes.
+- [x] **Paso 3**. Generación de Dataframes para Informes.
   - [x] Exportar archivos CSV con el contenido de cada dataframe.
-  - [ ] Modificar exportación para añadir datos a los existentes en los casos acumulativos (current no, el resto sí).
+        Modificar exportación para añadir datos a los existentes en los casos acumulativos (current no, el resto sí).
 
-- [ ] **Paso 4**. Análisis visual con Plotly.
+- [x] **Paso 4**. Análisis visual con Plotly.
   - [x] Gráficos de líneas interactivos para ver la evolución temporal.
   - [x] Scatter plots (diagramas de dispersión) para ver la correlación entre dos variables.
-  - [ ] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
+  - [x] Gráficos facetados (subplots) para comparar distintas regiones o indicadores simultáneamente.
 
-- [ ] **Paso 5**. Documentación y Sincronización.
+- [x] **Paso 5**. Documentación y Sincronización.
   - [x] Actualizar el repositorio de GitHub, incluyendo el requirements.txt.
-  - [ ] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
+  - [x] Documentar en este README.md las visualizaciones generadas y conclusiones preliminares obtenidas.
 
-- [ ] **Final**. Revisar documentación.
-  - [ ] README completo.
-  - [x] `requirements.txt` actualizado.
-  - [ ] Análisis de los resultados incluido en README.
+---
+
+### Visualizaciones generadas
+
+Hemos generado cuatro visualizaciones:
+
+1. Evolución diaria de temperaturas.
+2. Correlación entre precipitación diaria y temperatura media del día.
+3. Histograma para ver la frecuencia de las temperaturas horarias
+4. Rosa de los vientos con velocidad del viento y ángulo.
+
+La conclusión que podemos extraer por ahora, es que las variables temperatura media del día y precipitaciones total del mismo día no están correlacionadas, pero hay que tener en cuenta que estamos limitados a una predicción de los próximos siete días, por lo que aún no podemos hacer un análisis muy fiable.
 
 ---
 

@@ -70,25 +70,30 @@ def plot_correlation():
     return fig
 
 
-def plot_hourly_facets():
-    """Gráficos facetados para comparar la evolución según el estado del cielo."""
+def plot_temp_distribution():
+    """Histograma para ver la frecuencia de las temperaturas horarias."""
     df = pl.read_csv(DIRS["HOURLY_WEATHER"])
 
-    # Convertimos la columna date a datetime real en Polars
-    df = df.with_columns(pl.col("date").str.to_datetime(time_zone="UTC"))
-
-    fig = px.line(
+    fig = px.histogram(
         df,
-        x="date",
-        y="temperature",
-        facet_col="summary",  # Crea un gráfico por cada tipo de clima (Sunny, Partly Sunny...)
-        facet_col_wrap=3,  # Máximo 3 columnas de gráficos
-        title="Evolución Horaria segmentada por Clima",
-        labels={"date": "Hora", "temperature": "Temp (°C)"},
+        x="temperature",
+        nbins=15,
+        title="Distribución de Frecuencia Térmica",
+        labels={"temperature": "Temperatura (°C)", "count": "Frecuencia (Horas)"},
+        color_discrete_sequence=["#636EFA"],  # Un azul constante
+        opacity=0.75,
         template="plotly_white",
     )
-    # Ajustamos para que los ejes X sean independientes si se desea
-    fig.update_xaxes(matches=None)
+
+    # Añadimos una línea vertical con la media para dar más contexto
+    mean_temp = df["temperature"].mean()
+    fig.add_vline(
+        x=mean_temp,
+        line_dash="dash",
+        line_color="red",
+        annotation_text=f"Media: {mean_temp:.1f}°C",
+    )
+
     return fig
 
 
@@ -111,14 +116,19 @@ def plot_wind_rose():
 def plot_combined_dashboard():
     fig1 = plot_daily_evolution()
     fig2 = plot_correlation()
-    fig3 = plot_hourly_facets()
+    fig3 = plot_temp_distribution()
     fig4 = plot_wind_rose()
 
     # Crear una estructura de 1 fila y 2 columnas
     combined_fig = make_subplots(
         rows=2,
         cols=2,
-        subplot_titles=("Evolución", "Correlación", "Evolución Horaria", "Viento"),
+        subplot_titles=(
+            "Evolución",
+            "Correlación",
+            "Distribución de Temperatura",
+            "Viento",
+        ),
         specs=[
             [{"type": "xy"}, {"type": "xy"}],
             [{"type": "xy"}, {"type": "polar"}],
@@ -139,7 +149,31 @@ def plot_combined_dashboard():
         patch=dict(yshift=20)
     )  # Subir 20px lso títulos de los subplots para que no se solapen con las leyendas
 
-    combined_fig.update_layout(title_text="Dashboard Meteorológico")
+    # Subplot 1,1 (Evolución)
+    combined_fig.update_xaxes(title_text="Fecha", row=1, col=1)
+    combined_fig.update_yaxes(title_text="Temp (°C)", row=1, col=1)
+
+    # Subplot 1,2 (Correlación)
+    combined_fig.update_xaxes(title_text="Temp. Media (°C)", row=1, col=2)
+    combined_fig.update_yaxes(title_text="Lluvia (mm)", row=1, col=2)
+
+    # Subplot 2,1 (Distribución)
+    combined_fig.update_xaxes(title_text="Temperatura (°C)", row=2, col=1)
+    combined_fig.update_yaxes(title_text="Frecuencia (Horas)", row=2, col=1)
+
+    # Subplot 2,2 (Viento - Polar)
+    # Nota: Los gráficos polares usan 'angularaxis' y 'radialaxis'
+    combined_fig.update_polars(radialaxis_title_text="Velocidad", row=2, col=2)
+
+    combined_fig.update_layout(
+        title={
+            "text": "<b>DASHBOARD METEOROLÓGICO</b>",
+            "x": 0.5,  # Posición horizontal (0.5 es el centro)
+            "xanchor": "center",  # Ancla el texto al centro
+            "font": {"size": 28, "family": "Arial"},
+        },
+        showlegend=True,
+    )
     combined_fig.show()
 
 
