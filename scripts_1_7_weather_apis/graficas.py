@@ -2,7 +2,7 @@ import os
 import math
 from datetime import datetime
 import matplotlib.pyplot as plt
-from .mongo_connection import read_data
+from .db_connection import read_data
 
 OUTPUT_DIR = "graficas"
 os.makedirs(OUTPUT_DIR, exist_ok=True)

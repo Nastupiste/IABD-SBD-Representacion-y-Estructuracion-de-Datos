@@ -29,14 +29,15 @@ En la actividad 3.1, estos son los objetivos:
 
 ### 👣 Pasos
 
-- [ ] Paso 0. Base de datos.
+- [ ] Paso 0. Prerrequisitos: Base de datos.
   - [ ] Adaptar el ejercicio a sqlite3 (la MongoDB de la actividad 1.7. ya se ha borrado de la capa gratuita de MongoAtlas).
   - [ ] Crear y almacenar nuevo .env.
   - [ ] Poblar la nueva Base de Datos, ¿una sola API?
   - [x] Añadir a este README las instrucciones para instalar las dependencias de este proyecto.
+  - [ ] Añadir LAT y LON para más ciudades.
 
 - [ ] Paso 1. Conexión.
-  - [ ] Establecer la conexión entre el entorno de Python y la base de datos de la Actividad 1.7.
+  - [ ] Establecer la conexión entre el entorno de Python y la base de datos.
   - [ ] Extraer datos y cargarlos en un objeto de Polars (read_database o conectores específicos).
 
 - [ ] Paso 2. Limpieza y Estructuración con Polars.
