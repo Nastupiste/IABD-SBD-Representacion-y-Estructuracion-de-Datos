@@ -67,7 +67,7 @@ Hemos generado cuatro visualizaciones:
 1. Evolución diaria de temperaturas.
 2. Correlación entre precipitación diaria y temperatura media del día.
 3. Histograma para ver la frecuencia de las temperaturas horarias
-4. Rosa de los vientos con velocidad del viento y ángulo.
+4. Rosa de los vientos con velocidad del viento y ángulo (del valor actual del viento).
 
 La conclusión que podemos extraer por ahora, es que las variables temperatura media del día y precipitaciones total del mismo día no están correlacionadas, pero hay que tener en cuenta que estamos limitados a una predicción de los próximos siete días, por lo que aún no podemos hacer un análisis muy fiable.
 
