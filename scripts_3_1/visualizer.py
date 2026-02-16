@@ -11,8 +11,14 @@ from scripts_1_7_weather_apis.db_connection import BASE_DIR
 BASE_PATH = Path(BASE_DIR)
 
 DIRS = {
-    "DAILY_STATS": BASE_PATH / "data_output" / "silver_layer" / "Estadísticas_diarias.csv",
-    "HOURLY_WEATHER": BASE_PATH / "data_output" / "silver_layer" / "Tiempo_por_horas.csv",
+    "DAILY_STATS": BASE_PATH
+    / "data_output"
+    / "silver_layer"
+    / "Estadísticas_diarias.csv",
+    "HOURLY_WEATHER": BASE_PATH
+    / "data_output"
+    / "silver_layer"
+    / "Tiempo_por_horas.csv",
     "CURRENT_WEATHER": BASE_PATH / "data_output" / "silver_layer" / "Tiempo_actual.csv",
 }
 
@@ -25,7 +31,7 @@ def plot_daily_evolution():
     # Esto permite que Plotly pinte varias líneas automáticamente con 'color'
     df_long = df.unpivot(
         index="date_no_time",
-        on=["temp_max", "temp_min", "temp_avg"],
+        on=["temp_max", "temp_avg", "temp_min"],
         variable_name="Metrica",
         value_name="Temperatura",
     )
@@ -174,6 +180,10 @@ def plot_combined_dashboard():
         },
         showlegend=True,
     )
+    # include_plotlyjs='cdn' hace que el archivo pese mucho menos al cargar la librería desde la web
+    combined_fig.write_html("plots.html", include_plotlyjs="cdn")
+
+    print("Reporte exportado con éxito en: plots.html")
     combined_fig.show()
 
 
