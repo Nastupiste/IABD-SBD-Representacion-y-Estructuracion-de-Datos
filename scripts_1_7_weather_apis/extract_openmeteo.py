@@ -68,35 +68,34 @@ def get_precip_type(rain_val, snow_val, showers_val):
 def get_open_meteo():
     timestamp_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Pedimos los campos necesarios para reconstruir el JSON
     params = {
         "latitude": LAT,
         "longitude": LON,
         "current": "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,precipitation,cloud_cover",
-        "hourly": "temperature_2m,weather_code,precipitation,rain,showers,snowfall",
+        "hourly": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,precipitation_probability,weather_code",
         "timezone": "auto",
         "forecast_days": 7,
     }
 
     try:
         response = requests.get(URL, params=params)
-        response.raise_for_status()  # Error si falla la petición HTTP
+        response.raise_for_status()
         data = response.json()
 
         # 1. Procesar CURRENT
         curr_raw = data["current"]
         w_slug, w_summary = get_weather_translation(curr_raw["weather_code"])
 
-        # Simulación de tipo de precipitación en current (Open-Meteo solo da 'precipitation' genérico en current simple)
-        # Asumimos lluvia si hay precipitación y la temperatura es > 0
+        # Deducimos el tipo basándonos en el código WMO
+        # Los códigos 71-77 son nieve.
         curr_precip_type = "none"
         if curr_raw["precipitation"] > 0:
-            curr_precip_type = "rain"
+            curr_precip_type = "snow" if 71 <= curr_raw["weather_code"] <= 77 else "rain"
 
         current_data = {
             "temperature": curr_raw["temperature_2m"],
             "summary": w_summary,
-            "icon": w_slug,  # Usamos el slug como 'icon'
+            "icon": w_slug,
             "wind": {
                 "speed": curr_raw["wind_speed_10m"],
                 "angle": curr_raw["wind_direction_10m"],
@@ -109,45 +108,42 @@ def get_open_meteo():
             "cloud_cover": curr_raw["cloud_cover"],
         }
 
-        # 2. Procesar datos
+        # 2. Procesar HOURLY
         hourly_raw = data["hourly"]
         hourly_data = []
 
         for i in range(len(hourly_raw["time"])):
-            h_slug, h_summary = get_weather_translation(hourly_raw["weather_code"][i])
-
-            # Lógica para tipo de precipitación más precisa aquí
+            w_code = hourly_raw["weather_code"][i]
             p_total = hourly_raw["precipitation"][i]
-            p_type = get_precip_type(
-                hourly_raw["rain"][i],
-                hourly_raw["snowfall"][i],
-                hourly_raw["showers"][i],
-            )
+            
+            h_slug, h_summary = get_weather_translation(w_code)
 
-            hourly_data.append(
-                {
-                    "date": str(
-                        datetime.fromisoformat(hourly_raw["time"][i]).replace(
-                            tzinfo=timezone.utc
-                        )
-                    ),
-                    "weather": h_slug,
-                    "temperature": hourly_raw["temperature_2m"][i],
-                    "summary": h_summary,
-                    "precipitation": {"total": p_total, "type": p_type},
-                }
-            )
+            # Lógica de tipo de precipitación simplificada sin 'rain' ni 'snowfall'
+            p_type = "none"
+            if p_total > 0:
+                # Si el código WMO indica nieve (71, 73, 75, 77, 85, 86)
+                if w_code in [71, 73, 75, 77, 85, 86]:
+                    p_type = "snow"
+                else:
+                    p_type = "rain"
 
-        # JSON Final
+            hourly_data.append({
+                "date": str(datetime.fromisoformat(hourly_raw["time"][i]).replace(tzinfo=timezone.utc)),
+                "weather": h_slug,
+                "temperature": hourly_raw["temperature_2m"][i],
+                "summary": h_summary,
+                "precipitation": {"total": p_total, "type": p_type},
+            })
+
+        # JSON Final (Estructura que espera tu esquema de Polars)
         datos_finales = {
-            "lat": LAT,
-            "lon": LON,
+            "lat": str(LAT),
+            "lon": str(LON),
             "timestamp_captura": timestamp_actual,
             "current": current_data,
-            "hourly": {"data": hourly_data},
+            "hourly": {"data": hourly_data}, # Mantenemos el nivel 'data' para tu esquema original
         }
 
-        # Insertar datos en la base de datos sqlite:
         insert_data(COLLECTION_NAME, datos_finales)
 
     except Exception as e:

@@ -1,6 +1,5 @@
 from scripts_1_7_weather_apis.db_connection import read_table
 from scripts_1_7_weather_apis.extract_openmeteo import get_open_meteo
-from scripts_1_7_weather_apis.extract_meteosource import get_meteosource
 from scripts_3_1.db_connector import get_polars_dataframe
 from scripts_3_1.data_processor import (
     get_hourly_weather_dataframe,
@@ -11,7 +10,6 @@ from scripts_3_1.visualizer import plot_combined_dashboard
 
 TABLES = [
     "openmeteo",
-    # "meteosource",
 ]
 
 
@@ -25,8 +23,6 @@ def get_new_data():
     print("\n\n --- Pidiendo nuevos datos a la API de OpenMeteo --- \n\n")
 
     get_open_meteo()
-
-    get_meteosource()
 
     print("\n --- \nDatos actualizados:")
 
@@ -52,7 +48,7 @@ def main():
     print("INICIO DEL PROCESO DE ANÁLISIS DE DATOS CLIMÁTICOS\n")
 
     # ==== La base de datos debe tener datos ya, si no es así, descomentar la siguiente línea ====
-    # get_new_data()
+    get_new_data()
 
     start_step(
         "Paso 1: CONEXIÓN: Obtener un objeto de Polars con los datos de la tabla 'openmeteo' usando read_database."

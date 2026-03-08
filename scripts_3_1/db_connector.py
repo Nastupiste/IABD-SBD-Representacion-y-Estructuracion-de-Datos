@@ -4,62 +4,38 @@ from scripts_1_7_weather_apis.db_connection import DB_PATH
 
 
 def get_weather_schema():
-    """Define el esquema exacto para el JSON de meteorología."""
-    # Esquema para la precipitación (se repite en current y hourly)
-    precip_schema = pl.Struct(
-        [pl.Field("total", pl.Float64), pl.Field("type", pl.String)]
-    )
-
-    return pl.Struct(
-        [
-            pl.Field("lat", pl.String),
-            pl.Field("lon", pl.String),
-            pl.Field("timestamp_captura", pl.String),
-            pl.Field(
-                "current",
-                pl.Struct(
-                    [
-                        pl.Field("temperature", pl.Float64),
-                        pl.Field("summary", pl.String),
-                        pl.Field("icon", pl.String),
-                        pl.Field("cloud_cover", pl.Float64),
-                        pl.Field(
-                            "wind",
-                            pl.Struct(
-                                [
-                                    pl.Field("speed", pl.Float64),
-                                    pl.Field("angle", pl.Int64),
-                                    pl.Field("dir", pl.String),
-                                ]
-                            ),
-                        ),
-                        pl.Field("precipitation", precip_schema),
-                    ]
-                ),
-            ),
-            pl.Field(
-                "hourly",
-                pl.Struct(
-                    [
-                        pl.Field(
-                            "data",
-                            pl.List(
-                                pl.Struct(
-                                    [
-                                        pl.Field("date", pl.String),
-                                        pl.Field("weather", pl.String),
-                                        pl.Field("temperature", pl.Float64),
-                                        pl.Field("summary", pl.String),
-                                        pl.Field("precipitation", precip_schema),
-                                    ]
-                                )
-                            ),
-                        )
-                    ]
-                ),
-            ),
-        ]
-    )
+    """Define el esquema exacto para el JSON real de Open-Meteo."""
+    
+    return pl.Struct([
+        pl.Field("latitude", pl.Float64),
+        pl.Field("longitude", pl.Float64),
+        pl.Field("generationtime_ms", pl.Float64),
+        pl.Field("utc_offset_seconds", pl.Int64),
+        pl.Field("timezone", pl.String),
+        pl.Field("timezone_abbreviation", pl.String),
+        pl.Field("elevation", pl.Float64),
+        # Sección 'current'
+        pl.Field("current", pl.Struct([
+            pl.Field("time", pl.String),
+            pl.Field("interval", pl.Int64),
+            pl.Field("temperature_2m", pl.Float64),
+            pl.Field("weather_code", pl.Int64),
+            pl.Field("wind_speed_10m", pl.Float64),
+            pl.Field("wind_direction_10m", pl.Int64),
+            pl.Field("precipitation", pl.Float64),
+            pl.Field("cloud_cover", pl.Int64),
+        ])),
+        # Sección 'hourly' (Fíjate que aquí son listas de tipos simples)
+        pl.Field("hourly", pl.Struct([
+            pl.Field("time", pl.List(pl.String)),
+            pl.Field("temperature_2m", pl.List(pl.Float64)),
+            pl.Field("relative_humidity_2m", pl.List(pl.Int64)),
+            pl.Field("apparent_temperature", pl.List(pl.Float64)),
+            pl.Field("precipitation", pl.List(pl.Float64)),
+            pl.Field("precipitation_probability", pl.List(pl.Int64)),
+            pl.Field("weather_code", pl.List(pl.Int64)),
+        ]))
+    ])
 
 
 def get_polars_dataframe(table_name):
