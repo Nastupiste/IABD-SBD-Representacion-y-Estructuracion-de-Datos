@@ -14,11 +14,7 @@ TABLES = [
 
 
 def get_new_data():
-    print("Datos guardados:")
-
-    for table in TABLES:
-        read_table(table)
-
+  
     # print("\n\n --- Pidiendo nuevos datos a ambas APIs --- \n\n")
     print("\n\n --- Pidiendo nuevos datos a la API de OpenMeteo --- \n\n")
 
@@ -26,9 +22,7 @@ def get_new_data():
 
     print("\n --- \nDatos actualizados:")
 
-    for table in TABLES:
-        read_table(table)
-
+  
 
 def start_step(description):
     print("\n")
@@ -67,27 +61,27 @@ def main():
     if df is not None:
 
         df_hourly = get_hourly_weather_dataframe(df)
-        df_current = get_current_weather_dataframe(df)
-        df_stats = get_stats_dataframe(df)
+        #df_current = get_current_weather_dataframe(df)
+        #df_stats = get_stats_dataframe(df)
 
         print("--- VISTA DEL PRONÓSTICO POR HORAS ---\n")
         print(df_hourly.head(10))
 
-        print("\n--- VISTA DEL CLIMA ACTUAL ---\n")
-        print(df_current)
+        #print("\n--- VISTA DEL CLIMA ACTUAL ---\n")
+        #print(df_current)
 
-        print("\n--- VISTA DE ESTADÍSTICAS POR ID ---\n")
-        print(df_stats.head(10))
-
-    end_step()
-
-    start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
-
-    print("Abriendo dashboard combinado con 4 gráficos diferentes...")
-
-    plot_combined_dashboard()
+        #print("\n--- VISTA DE ESTADÍSTICAS POR ID ---\n")
+        #print(df_stats.head(10))
 
     end_step()
+
+    #start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
+
+    #print("Abriendo dashboard combinado con 4 gráficos diferentes...")
+
+    #plot_combined_dashboard()
+
+    #end_step()
 
 
 if __name__ == "__main__":

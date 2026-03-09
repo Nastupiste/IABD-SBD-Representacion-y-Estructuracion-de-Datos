@@ -41,51 +41,45 @@ def export_to_csv(df, filename):
 
 
 def get_hourly_weather_dataframe(df):
+
     """
     Datos del tiempo extraídos por franja horaria.
-    Adaptado al formato columnar de Open-Meteo.
+    Se corrige el error de parseo de fecha adaptándose al formato ISO T.
     """
-    # 1. Expandimos el objeto 'hourly' para tener las columnas de listas
+    # 1. Selección y desanidado
     df_hourly = (
-        df.select(["latitude", "longitude", "hourly"])
+        df.select(["lat", "lon", "timestamp_captura", "hourly"])
         .drop_nulls("hourly")
         .unnest("hourly")
+        .explode("data")
+        .unnest("data")
     )
 
-    # 2. EXPLODE MULTI-COLUMNA
-    # Polars expande todas estas listas en paralelo para crear las filas
-    df_hourly = df_hourly.explode([
-        "time", 
-        "temperature_2m", 
-        "relative_humidity_2m", 
-        "apparent_temperature", 
-        "precipitation", 
-        "precipitation_probability", 
-        "weather_code"
-    ])
-
-    # 3. LIMPIEZA Y TRANSFORMACIÓN
+    # 2. TRANSFORMACIÓN
     df_hourly = df_hourly.with_columns([
-        # Convertimos el string de tiempo a objeto datetime real
-        pl.col("time").str.to_datetime(),
+        # Usamos strict=False para evitar que el programa cruja si una fecha falla
+        # y no forzamos la zona horaria aquí para que acepte el formato "T"
+        pl.col("date").str.to_datetime(strict=False), 
+
+        # Aplanamos el struct de precipitación
+        pl.col("precipitation").struct.field("total").alias("precip_mm"),
+        pl.col("precipitation").struct.field("type").alias("precip_tipo"),
         
-        # En Open-Meteo, 'precipitation' ya es un número (0.0, 0.2, etc.)
-        # No hace falta buscar .struct.field("total")
-        pl.col("precipitation").fill_null(0.0).alias("precip_total"),
-        
-        # Forward fill para la temperatura si hubiera algún hueco
-        pl.col("temperature_2m").fill_null(strategy="forward"),
+        # Aseguramos tipos numéricos
+        pl.col("temperature").cast(pl.Float64, strict=False)
     ])
 
-    # 4. FILTRO DE SEGURIDAD (Calidad de datos)
-    df_hourly = df_hourly.filter(
-        pl.col("temperature_2m").is_between(-60, 60)
-    )
-    export_to_csv(df_hourly, "Tiempo_por_horas")
-    # Nota: Si necesitas 'summary' o 'icon', Open-Meteo no los da directamente.
-    # Se calculan a partir de 'weather_code'.
-    print("Hola, este es el dataframe horario:")
-    print(df_hourly)
+    # 3. FILTRO Y EXPORTACIÓN
+    # Eliminamos nulos que pudieran haber quedado en 'date' por el parseo
+    df_hourly = df_hourly.drop_nulls("date")
+    
+    df_hourly = df_hourly.filter(pl.col("temperature").is_between(-60, 60))
+    
+    # Exportamos el CSV
+    df_final_csv = df_hourly.drop("precipitation")
+    export_to_csv(df_final_csv, "Tiempo_por_horas")
+    
+    print("✅ ¡Pipeline completado con éxito!")
     return df_hourly
 
 

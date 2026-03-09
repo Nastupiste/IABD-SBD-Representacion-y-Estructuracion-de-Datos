@@ -66,8 +66,13 @@ def get_precip_type(rain_val, snow_val, showers_val):
 
 
 def get_open_meteo():
+    """
+    Captura datos de Open-Meteo, procesa campos de current y hourly,
+    y guarda la estructura JSON final en la base de datos.
+    """
     timestamp_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    # Definimos los parámetros exactos que queremos de la API
     params = {
         "latitude": LAT,
         "longitude": LON,
@@ -82,72 +87,80 @@ def get_open_meteo():
         response.raise_for_status()
         data = response.json()
 
-        # 1. Procesar CURRENT
+        # --- 1. PROCESAR CURRENT ---
         curr_raw = data["current"]
         w_slug, w_summary = get_weather_translation(curr_raw["weather_code"])
 
-        # Deducimos el tipo basándonos en el código WMO
-        # Los códigos 71-77 son nieve.
+        # Lógica de tipo de precipitación para 'current'
         curr_precip_type = "none"
         if curr_raw["precipitation"] > 0:
+            # Si el código WMO es de nieve (71-77), marcamos snow, si no rain
             curr_precip_type = "snow" if 71 <= curr_raw["weather_code"] <= 77 else "rain"
 
         current_data = {
-            "temperature": curr_raw["temperature_2m"],
+            "temperature": float(curr_raw["temperature_2m"]),
             "summary": w_summary,
             "icon": w_slug,
             "wind": {
-                "speed": curr_raw["wind_speed_10m"],
-                "angle": curr_raw["wind_direction_10m"],
+                "speed": float(curr_raw["wind_speed_10m"]),
+                "angle": int(curr_raw["wind_direction_10m"]),
                 "dir": get_wind_dir(curr_raw["wind_direction_10m"]),
             },
             "precipitation": {
-                "total": curr_raw["precipitation"],
+                "total": float(curr_raw["precipitation"]),
                 "type": curr_precip_type,
             },
-            "cloud_cover": curr_raw["cloud_cover"],
+            "cloud_cover": int(curr_raw["cloud_cover"]),
         }
 
-        # 2. Procesar HOURLY
+        # --- 2. PROCESAR HOURLY (Capturando todos los campos críticos) ---
         hourly_raw = data["hourly"]
-        hourly_data = []
+        hourly_list = []
 
+        # Recorremos la lista de 'time' para reconstruir los objetos por hora
         for i in range(len(hourly_raw["time"])):
             w_code = hourly_raw["weather_code"][i]
-            p_total = hourly_raw["precipitation"][i]
-            
+            p_total = float(hourly_raw["precipitation"][i])
             h_slug, h_summary = get_weather_translation(w_code)
 
-            # Lógica de tipo de precipitación simplificada sin 'rain' ni 'snowfall'
+            # Lógica de tipo de precipitación para la franja horaria
             p_type = "none"
             if p_total > 0:
-                # Si el código WMO indica nieve (71, 73, 75, 77, 85, 86)
-                if w_code in [71, 73, 75, 77, 85, 86]:
-                    p_type = "snow"
-                else:
-                    p_type = "rain"
+                p_type = "snow" if 71 <= w_code <= 77 else "rain"
 
-            hourly_data.append({
-                "date": str(datetime.fromisoformat(hourly_raw["time"][i]).replace(tzinfo=timezone.utc)),
+            # Construimos el objeto de la hora con TODOS los datos solicitados
+            hourly_list.append({
+                "date": str(hourly_raw["time"][i]),
                 "weather": h_slug,
-                "temperature": hourly_raw["temperature_2m"][i],
+                "temperature": float(hourly_raw["temperature_2m"][i]),
+                "humidity": int(hourly_raw["relative_humidity_2m"][i]),
+                "apparent_temp": float(hourly_raw["apparent_temperature"][i]),
+                "precipitation": {
+                    "total": p_total,
+                    "type": p_type
+                },
+                "precip_prob": int(hourly_raw["precipitation_probability"][i]),
                 "summary": h_summary,
-                "precipitation": {"total": p_total, "type": p_type},
             })
 
-        # JSON Final (Estructura que espera tu esquema de Polars)
+        # --- 3. CONSTRUCCIÓN DEL JSON FINAL PARA SQLITE ---
+        # Usamos 'lat' y 'lon' para coincidir con tu estructura de DB
         datos_finales = {
             "lat": str(LAT),
             "lon": str(LON),
             "timestamp_captura": timestamp_actual,
             "current": current_data,
-            "hourly": {"data": hourly_data}, # Mantenemos el nivel 'data' para tu esquema original
+            "hourly": {
+                "data": hourly_list  # Aquí metemos la lista de objetos procesados
+            },
         }
-
+        print(datos_finales)
+        # Guardar en la base de datos
         insert_data(COLLECTION_NAME, datos_finales)
+        print(f"✅ [OK] Datos de meteorología guardados: {timestamp_actual}")
 
     except Exception as e:
-        print(f"Error al obtener datos de Open-Meteo: {e}")
+        print(f"❌ [ERROR] Fallo en get_open_meteo: {e}")
 
 
 if __name__ == "__main__":
