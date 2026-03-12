@@ -1,3 +1,5 @@
+import os
+
 import polars as pl
 import plotly.express as px
 from pathlib import Path
@@ -18,6 +20,9 @@ DIRS = {
     / "Tiempo_por_horas.csv",
     "CURRENT_WEATHER": BASE_PATH / "data_output" / "silver_layer" / "Tiempo_actual.csv",
 }
+
+OUTPUT_PLOTS_DIR = f"{BASE_PATH}/docs"
+os.makedirs(OUTPUT_PLOTS_DIR, exist_ok=True)
 
 
 def plot_combined_dashboard():
@@ -120,8 +125,8 @@ def plot_combined_dashboard():
     fig.update_xaxes(title_text="Calendario Semanal", row=3, col=1)
 
     # Exportar un solo archivo
-    fig.write_html("plots.html")
-    print("Reporte generado: plots.html")
+    fig.write_html(OUTPUT_PLOTS_DIR + "/index.html")
+    print(f"Reporte generado: {OUTPUT_PLOTS_DIR}/index.html")
 
 
 if __name__ == "__main__":

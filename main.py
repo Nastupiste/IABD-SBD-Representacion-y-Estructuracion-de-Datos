@@ -1,4 +1,3 @@
-from scripts_1_7_weather_apis.db_connection import read_table
 from scripts_1_7_weather_apis.extract_openmeteo import get_open_meteo
 from scripts_3_1.db_connector import get_polars_df_from_last_fetch
 from scripts_3_1.data_processor import (
@@ -72,7 +71,7 @@ def main():
 
     start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
 
-    print("Abriendo dashboard combinado con 4 gráficos diferentes...")
+    print("Generando dashboard combinado con los tres gráficos...")
 
     plot_combined_dashboard()
 
