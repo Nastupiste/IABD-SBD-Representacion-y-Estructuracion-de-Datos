@@ -1,6 +1,6 @@
 from scripts_1_7_weather_apis.db_connection import read_table
 from scripts_1_7_weather_apis.extract_openmeteo import get_open_meteo
-from scripts_3_1.db_connector import get_polars_dataframe
+from scripts_3_1.db_connector import get_polars_df_from_last_fetch
 from scripts_3_1.data_processor import (
     get_hourly_weather_dataframe,
     get_current_weather_dataframe,
@@ -14,15 +14,9 @@ TABLES = [
 
 
 def get_new_data():
-  
-    # print("\n\n --- Pidiendo nuevos datos a ambas APIs --- \n\n")
     print("\n\n --- Pidiendo nuevos datos a la API de OpenMeteo --- \n\n")
-
     get_open_meteo()
 
-    print("\n --- \nDatos actualizados:")
-
-  
 
 def start_step(description):
     print("\n")
@@ -41,16 +35,15 @@ def main():
 
     print("INICIO DEL PROCESO DE ANÁLISIS DE DATOS CLIMÁTICOS\n")
 
-    # ==== La base de datos debe tener datos ya, si no es así, descomentar la siguiente línea ====
     get_new_data()
 
     start_step(
         "Paso 1: CONEXIÓN: Obtener un objeto de Polars con los datos de la tabla 'openmeteo' usando read_database."
     )
 
-    df = get_polars_dataframe("openmeteo")
+    df = get_polars_df_from_last_fetch("openmeteo")
     if df is not None:
-        print(df.head())
+        print(df)
 
     end_step()
 
@@ -61,27 +54,29 @@ def main():
     if df is not None:
 
         df_hourly = get_hourly_weather_dataframe(df)
-        #df_current = get_current_weather_dataframe(df)
-        #df_stats = get_stats_dataframe(df)
 
         print("--- VISTA DEL PRONÓSTICO POR HORAS ---\n")
         print(df_hourly.head(10))
 
-        #print("\n--- VISTA DEL CLIMA ACTUAL ---\n")
-        #print(df_current)
+        df_current = get_current_weather_dataframe(df)
 
-        #print("\n--- VISTA DE ESTADÍSTICAS POR ID ---\n")
-        #print(df_stats.head(10))
+        print("\n--- VISTA DEL CLIMA ACTUAL ---\n")
+        print(df_current)
+
+        df_stats = get_stats_dataframe(df)
+
+        print("\n--- VISTA DE ESTADÍSTICAS DIARIAS ---\n")
+        print(df_stats.head(10))
 
     end_step()
 
-    #start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
+    start_step("Paso 4: ANÁLISIS VISUAL CON PLOTLY.")
 
-    #print("Abriendo dashboard combinado con 4 gráficos diferentes...")
+    print("Abriendo dashboard combinado con 4 gráficos diferentes...")
 
-    #plot_combined_dashboard()
+    plot_combined_dashboard()
 
-    #end_step()
+    end_step()
 
 
 if __name__ == "__main__":

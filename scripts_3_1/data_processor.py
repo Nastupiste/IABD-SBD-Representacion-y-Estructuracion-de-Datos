@@ -1,7 +1,7 @@
 import os
 import polars as pl
 from scripts_1_7_weather_apis.db_connection import BASE_DIR
-from .db_connector import get_polars_dataframe
+from .db_connector import get_polars_df_from_last_fetch
 
 """
 # Utilizando Polars:
@@ -31,7 +31,9 @@ def clean_nulls(df):
 
 def export_to_csv(df, filename):
     """Exportar un DataFrame de Polars a CSV."""
-    output_dir = f"{BASE_DIR}/data_output/silver_layer"  # Directorio de salida para los CSVs
+    output_dir = (
+        f"{BASE_DIR}/data_output/silver_layer"  # Directorio de salida para los CSVs
+    )
     os.makedirs(output_dir, exist_ok=True)  # Crear el directorio si no existe
 
     full_path = f"{output_dir}/{filename}.csv"
@@ -41,14 +43,13 @@ def export_to_csv(df, filename):
 
 
 def get_hourly_weather_dataframe(df):
-
     """
     Datos del tiempo extraídos por franja horaria.
     Se corrige el error de parseo de fecha adaptándose al formato ISO T.
     """
     # 1. Selección y desanidado
     df_hourly = (
-        df.select(["lat", "lon", "timestamp_captura", "hourly"])
+        df.select(["lat", "lon", "hourly"])
         .drop_nulls("hourly")
         .unnest("hourly")
         .explode("data")
@@ -56,30 +57,28 @@ def get_hourly_weather_dataframe(df):
     )
 
     # 2. TRANSFORMACIÓN
-    df_hourly = df_hourly.with_columns([
-        # Usamos strict=False para evitar que el programa cruja si una fecha falla
-        # y no forzamos la zona horaria aquí para que acepte el formato "T"
-        pl.col("date").str.to_datetime(strict=False), 
-
-        # Aplanamos el struct de precipitación
-        pl.col("precipitation").struct.field("total").alias("precip_mm"),
-        pl.col("precipitation").struct.field("type").alias("precip_tipo"),
-        
-        # Aseguramos tipos numéricos
-        pl.col("temperature").cast(pl.Float64, strict=False)
-    ])
+    df_hourly = df_hourly.with_columns(
+        [
+            # Usamos strict=False para evitar que el programa se interrumpa si una fecha falla
+            # y no forzamos la zona horaria aquí para que acepte el formato "T"
+            pl.col("date").str.to_datetime(strict=False),
+            # Aplanamos el struct de precipitación
+            pl.col("precipitation").struct.field("total").alias("precip_mm"),
+            pl.col("precipitation").struct.field("type").alias("precip_tipo"),
+            # Aseguramos tipos numéricos
+            pl.col("temperature").cast(pl.Float64, strict=False),
+        ]
+    )
 
     # 3. FILTRO Y EXPORTACIÓN
-    # Eliminamos nulos que pudieran haber quedado en 'date' por el parseo
     df_hourly = df_hourly.drop_nulls("date")
-    
+
     df_hourly = df_hourly.filter(pl.col("temperature").is_between(-60, 60))
-    
+
     # Exportamos el CSV
     df_final_csv = df_hourly.drop("precipitation")
     export_to_csv(df_final_csv, "Tiempo_por_horas")
-    
-    print("✅ ¡Pipeline completado con éxito!")
+
     return df_hourly
 
 
@@ -122,8 +121,8 @@ def get_current_weather_dataframe(df):
 
 def get_stats_dataframe(df):
     """
-    Estadísticas por ID (máximo, mínimo, promedio de temperatura y total de precipitación diaria). Aquí se crean columnas nuevas,
-    agrupando por ID para obtener estadísticas diarias.
+    Estadísticas por día (máximo, mínimo, promedio de temperatura y total de precipitación diaria). Aquí se crean columnas nuevas,
+    agrupando por día para obtener estadísticas diarias.
     """
     df = clean_nulls(df)
     df_stats = (
@@ -172,7 +171,7 @@ def get_stats_dataframe(df):
 
 if __name__ == "__main__":
 
-    df = get_polars_dataframe("openmeteo")
+    df = get_polars_df_from_last_fetch("openmeteo")
 
     if df is not None:
 

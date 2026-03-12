@@ -95,7 +95,9 @@ def get_open_meteo():
         curr_precip_type = "none"
         if curr_raw["precipitation"] > 0:
             # Si el código WMO es de nieve (71-77), marcamos snow, si no rain
-            curr_precip_type = "snow" if 71 <= curr_raw["weather_code"] <= 77 else "rain"
+            curr_precip_type = (
+                "snow" if 71 <= curr_raw["weather_code"] <= 77 else "rain"
+            )
 
         current_data = {
             "temperature": float(curr_raw["temperature_2m"]),
@@ -129,19 +131,18 @@ def get_open_meteo():
                 p_type = "snow" if 71 <= w_code <= 77 else "rain"
 
             # Construimos el objeto de la hora con TODOS los datos solicitados
-            hourly_list.append({
-                "date": str(hourly_raw["time"][i]),
-                "weather": h_slug,
-                "temperature": float(hourly_raw["temperature_2m"][i]),
-                "humidity": int(hourly_raw["relative_humidity_2m"][i]),
-                "apparent_temp": float(hourly_raw["apparent_temperature"][i]),
-                "precipitation": {
-                    "total": p_total,
-                    "type": p_type
-                },
-                "precip_prob": int(hourly_raw["precipitation_probability"][i]),
-                "summary": h_summary,
-            })
+            hourly_list.append(
+                {
+                    "date": str(hourly_raw["time"][i]),
+                    "weather": h_slug,
+                    "temperature": float(hourly_raw["temperature_2m"][i]),
+                    "humidity": int(hourly_raw["relative_humidity_2m"][i]),
+                    "apparent_temp": float(hourly_raw["apparent_temperature"][i]),
+                    "precipitation": {"total": p_total, "type": p_type},
+                    "precip_prob": int(hourly_raw["precipitation_probability"][i]),
+                    "summary": h_summary,
+                }
+            )
 
         # --- 3. CONSTRUCCIÓN DEL JSON FINAL PARA SQLITE ---
         # Usamos 'lat' y 'lon' para coincidir con tu estructura de DB
@@ -154,7 +155,6 @@ def get_open_meteo():
                 "data": hourly_list  # Aquí metemos la lista de objetos procesados
             },
         }
-        print(datos_finales)
         # Guardar en la base de datos
         insert_data(COLLECTION_NAME, datos_finales)
         print(f"✅ [OK] Datos de meteorología guardados: {timestamp_actual}")
