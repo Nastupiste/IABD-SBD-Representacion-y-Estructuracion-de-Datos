@@ -8,7 +8,10 @@ dependencies = [
     "matplotlib>=3.10.7",
     "plotly>=6.5.2",
     "polars>=1.38.1",
+    "pyarrow>=14.0.0",
     "pymeteosource>=1.7.0",
     "pymongo[srv]",
     "python-dotenv",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
 ]
