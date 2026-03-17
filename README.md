@@ -1,6 +1,8 @@
 <h1 align="center">ANÁLISIS Y CUADROS DE MANDO</h1>
 
-![Banner para el README.md](./banner.gif)
+<p align="center">
+  <img src="./banner.gif" alt="Banner para el README.md" width="500">
+</p>
 
 > **Profesor:** Alberto Márquez Alarcón - [@amarala931](https://github.com/amarala931).
 
