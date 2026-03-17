@@ -90,6 +90,15 @@ Hemos generado las siguientes visualizaciones:
 
 - Scripts de python: `main_3_3.py`, carpeta scripts_3_3 de este repositorio.
 - Informe.
+- Gráficos de clústers y matriz de confusión.
+
+#### Clústers
+
+![Clústers](./weather_clusters.png)
+
+#### Matriz de confusión
+
+![Matriz de confusión](./confusion_matrix.png)
 
 ---
 
