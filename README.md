@@ -68,12 +68,28 @@ Hemos generado las siguientes visualizaciones:
 
 - Los días de lluvia, la temperatura cae.
 
-### ENTREGA 3.1. REPRESENTACIÓN Y ESTRUCTURA
+### ENTREGA 3.1.
 
 - Scripts de python: `main.py`, carpeta scripts_3_1 y carpeta scripts_1_7_weather_apis de este repositorio, que incluye el código de la actividad 1.7 del que partimos, muy modificado para esta actividad.
 - Carpeta data_output/ con los csv generados: incluida en este repositorio.
 - Exportaciones de los gráficos: docs/plots.html en este repositorio, desplegado en [esta dirección](https://nastupiste.github.io/IABD-SBD-Representacion-y-Estructuracion-de-Datos/).
 - Breve informe final: el punto anterior de este README (Visualizaciones generadas).
+
+---
+
+## 3.3. Modelado y algoritmos
+
+### 👣 Pasos
+
+1. Preparación del Dataset y Feature Engineering
+2. Criterio de Elección de Algoritmos
+3. Interpretación de Métricas y Resultados
+4. Valor Aportado al Problema
+
+### ENTREGA 3.3.
+
+- Scripts de python: `main_3_3.py`, carpeta scripts_3_3 de este repositorio.
+- Informe.
 
 ---
 
