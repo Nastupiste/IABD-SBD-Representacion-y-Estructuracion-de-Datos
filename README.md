@@ -13,20 +13,6 @@
 
 ## 3.1. Representación y Estructura de Datos
 
-### 🎯 Objetivos
-
-En la actividad 3.1, estos son los objetivos:
-
-1. **Extraer** información de la fuente de datos creada anteriormente integrándola en un flujo de Python.
-
-2. **Dominar la manipulación de DataFrames con Polars**, aplicando filtros, agregaciones y transformaciones complejas.
-
-3. **Diseñar visualizaciones interactivas avanzadas** que permitan identificar tendencias, patrones y valores atípicos (outliers) en los datos sobre el poder adquisitivo y el empleo.
-
-4. **Mantener el ciclo de vida del software** mediante el uso de forks en Git y GitHub para la colaboración y el control de versiones.
-
----
-
 ### 👣 Pasos
 
 - [x] **Paso 0**. Prerrequisitos: Base de datos.
@@ -62,20 +48,31 @@ En la actividad 3.1, estos son los objetivos:
 
 ### Visualizaciones generadas
 
-Hemos generado cuatro visualizaciones:
+Hemos generado las siguientes visualizaciones:
 
-1. Evolución diaria de temperaturas.
-2. Correlación entre precipitación diaria y temperatura media del día.
-3. Histograma para ver la frecuencia de las temperaturas horarias
-4. Rosa de los vientos con velocidad del viento y ángulo (del valor actual del viento).
+#### Intensidad térmica horaria
 
-La conclusión que podemos extraer por ahora, es que las variables temperatura media del día y precipitaciones total del mismo día no están correlacionadas, pero hay que tener en cuenta que estamos limitados a una predicción de los próximos siete días, por lo que aún no podemos hacer un análisis muy fiable.
+![Intensidad térmica horaria](./visualizacion_1.png)
+
+#### Impacto de la humedad en la sensación térmica
+
+![Impacto de la humedad en la sensación térmica](./visualizacion_2.png)
+
+#### Relación lluvia - temperatura media
+
+![Relación lluvia - temperatura media](./visualizacion_3.png)
+
+**Conclusiones**
+
+- Correlación inversa entre temperatura y humedad: cuando la temperatura alcanza sus picos máximos, la humedad relativa cae a sus niveles más bajos, y viceversa.
+
+- Los días de lluvia, la temperatura cae.
 
 ### ENTREGA 3.1. REPRESENTACIÓN Y ESTRUCTURA
 
 - Scripts de python: `main.py`, carpeta scripts_3_1 y carpeta scripts_1_7_weather_apis de este repositorio, que incluye el código de la actividad 1.7 del que partimos, muy modificado para esta actividad.
 - Carpeta data_output/ con los csv generados: incluida en este repositorio.
-- Exportaciones de los gráficos: plots.html y carpeta plots_files de este repositorio.
+- Exportaciones de los gráficos: docs/plots.html en este repositorio, desplegado en [esta dirección](https://nastupiste.github.io/IABD-SBD-Representacion-y-Estructuracion-de-Datos/).
 - Breve informe final: el punto anterior de este README (Visualizaciones generadas).
 
 ---
