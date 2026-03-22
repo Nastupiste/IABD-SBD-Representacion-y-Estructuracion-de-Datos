@@ -2,8 +2,38 @@ import requests
 from datetime import datetime, timezone
 from .db_connection import insert_data
 
+# Sevilla
 LAT = "37.3886"
 LON = "-5.9823"
+
+# Almeria
+# LAT = "36.8340"
+# LON = "-2.4637"
+
+# Cadiz
+# LAT = "36.5271"
+# LON = "-6.2886"
+
+# Cordoba
+# LAT = "37.8882"
+# LON = "-4.7794"
+
+# Granada
+# LAT = "37.1773"
+# LON = "-3.5986"
+
+# Huelva
+# LAT = "37.2614"
+# LON = "-6.9447"
+
+# Jaen
+# LAT = "37.7796"
+# LON = "-3.7849"
+
+# Malaga
+# LAT = "36.7213"
+# LON = "-4.4214"
+
 URL = "https://api.open-meteo.com/v1/forecast"
 COLLECTION_NAME = "openmeteo"
 
